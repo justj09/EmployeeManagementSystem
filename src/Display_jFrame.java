@@ -72,19 +72,19 @@ public class Display_jFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
         int numInHT = employeeTable.size;
-
+        int row = 0;
         model = new DefaultTableModel(new Object[] {"Status", "Emp Num", "First Name", "Last Name"}, numInHT);
         jTable1.setModel(model);
         jTable1.setAutoCreateColumnsFromModel(true);
         System.out.println("Here are the employees:");
-        for (int i = 0; i < employeeTable.size; i++) {
-            for (EmployeeInfo employee: employeeTable.buckets[i]) {
-                model.setValueAt(employee instanceof FTE ? "Full Time" : "Part Time", i, 0);
-                model.setValueAt(employee.employeeNumber, i, 1);
-                model.setValueAt(employee.firstName, i, 2);
-                model.setValueAt(employee.lastName, i, 3);
+        for (ArrayList<EmployeeInfo> bucket : employeeTable.buckets) {
+            for (EmployeeInfo employee : bucket) {
+                model.setValueAt(employee instanceof FTE ? "Full Time" : "Part Time", row, 0);
+                model.setValueAt(employee.employeeNumber, row, 1);
+                model.setValueAt(employee.firstName, row, 2);
+                model.setValueAt(employee.lastName, row, 3);
+                row++;
             }
         }           
     }//GEN-LAST:event_jButton1ActionPerformed
