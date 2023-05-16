@@ -1,9 +1,11 @@
 import java.io.*;
 import java.util.*;
+import javax.swing.table.DefaultTableModel;
 
 public class Main_jFrame extends javax.swing.JFrame {
 
     public MyHashTable employeeTable;
+    public DefaultTableModel model;
 
     public Main_jFrame() {
         initComponents();
@@ -15,24 +17,18 @@ public class Main_jFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jFileChooser = new javax.swing.JFileChooser();
-        jDisplayEmployeeButton = new javax.swing.JButton();
         jAddEmployeeButton = new javax.swing.JButton();
         jSaveFileButton = new javax.swing.JButton();
         jLoadFileButton = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         jFileChooser.setApproveButtonText("");
         jFileChooser.setApproveButtonToolTipText("");
         jFileChooser.setDialogTitle("");
-        jFileChooser.setFileSelectionMode(javax.swing.JFileChooser.FILES_AND_DIRECTORIES);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jDisplayEmployeeButton.setText("Display all employees");
-        jDisplayEmployeeButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jDisplayEmployeeButtonActionPerformed(evt);
-            }
-        });
 
         jAddEmployeeButton.setText("Add new employee");
         jAddEmployeeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -55,40 +51,65 @@ public class Main_jFrame extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Display employees currently in the hash table");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jTable1.setAutoCreateColumnsFromModel(false);
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        jTable1.setAutoscrolls(false);
+        jScrollPane1.setViewportView(jTable1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jDisplayEmployeeButton)
-                    .addComponent(jAddEmployeeButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
-                .addComponent(jLoadFileButton))
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jSaveFileButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jAddEmployeeButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLoadFileButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jSaveFileButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                        .addComponent(jButton1)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLoadFileButton)
-                .addGap(75, 75, 75)
-                .addComponent(jDisplayEmployeeButton)
-                .addGap(29, 29, 29)
-                .addComponent(jAddEmployeeButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                .addComponent(jSaveFileButton)
-                .addGap(81, 81, 81))
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jSaveFileButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jAddEmployeeButton)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jDisplayEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDisplayEmployeeButtonActionPerformed
-        new Display_jFrame(employeeTable).setVisible(true);
-    }//GEN-LAST:event_jDisplayEmployeeButtonActionPerformed
 
     private void jAddEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAddEmployeeButtonActionPerformed
         new AddNewEmployee_jFrame(employeeTable).setVisible(true);
@@ -150,6 +171,24 @@ public class Main_jFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jLoadFileButtonActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int num = employeeTable.size;
+        int row = 0;
+        model = new DefaultTableModel(new Object[] {"Status", "Emp Num", "First Name", "Last Name"}, num);
+        jTable1.setModel(model);
+        jTable1.setAutoCreateColumnsFromModel(true);
+        System.out.println("Here are the employees:");
+        for (ArrayList<EmployeeInfo> bucket : employeeTable.buckets) {
+            for (EmployeeInfo employee : bucket) {
+                model.setValueAt(employee instanceof FTE ? "Full Time" : "Part Time", row, 0);
+                model.setValueAt(employee.employeeNumber, row, 1);
+                model.setValueAt(employee.firstName, row, 2);
+                model.setValueAt(employee.lastName, row, 3);
+                row++;
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -190,9 +229,11 @@ public class Main_jFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jAddEmployeeButton;
-    private javax.swing.JButton jDisplayEmployeeButton;
+    private javax.swing.JButton jButton1;
     private javax.swing.JFileChooser jFileChooser;
     private javax.swing.JButton jLoadFileButton;
     private javax.swing.JButton jSaveFileButton;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

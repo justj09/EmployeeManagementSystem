@@ -41,5 +41,19 @@ public class MyHashTable {
         }
         return null;
     }
- 
+    
+    public ArrayList<EmployeeInfo> retrieveAll(String query){
+        ArrayList<EmployeeInfo> list = new ArrayList();
+        for (ArrayList<EmployeeInfo> bucket : this.buckets) {
+            for (EmployeeInfo item : bucket) {
+                Boolean a = String.valueOf(item.employeeNumber).contains(query);
+                Boolean b = item.firstName.contains(query);
+                Boolean c = item.lastName.contains(query);
+                if ((a || b || c) && a){
+                    
+                }
+            }
+        return null;
+        }
+    }
 }

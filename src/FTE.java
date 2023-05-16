@@ -8,7 +8,6 @@ public class FTE extends EmployeeInfo {
     } 
     
     public FTE(String[] a){
-        super(Integer.parseInt(a[0]), a[1], a[2]);
-        this.yearlySalary = Double.parseDouble(a[3]);
+        this(Integer.parseInt(a[0]), a[1], a[2], Double.parseDouble(a[3]));
     }
 }
