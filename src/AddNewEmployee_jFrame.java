@@ -1,11 +1,11 @@
-import javax.swing.JTextField;
+import javax.swing.*;
+import java.lang.Math.*;
 
 public class AddNewEmployee_jFrame extends javax.swing.JFrame {
-    
     public MyHashTable employeeTable;  // This contains the ref value for theHT of MainJFrame.
     public javax.swing.JTextField[] FTEFieldArray;
     public javax.swing.JTextField[] PTEFieldArray;
-
+    
     public AddNewEmployee_jFrame(MyHashTable employeeTable) {
         initComponents();
         this.employeeTable = employeeTable;
@@ -14,7 +14,7 @@ public class AddNewEmployee_jFrame extends javax.swing.JFrame {
         clearField(FTEFieldArray);
         clearField(PTEFieldArray);
         jResponseLabel.setVisible(false); // Hide the Added new employee message
-        jFTERadioButton.doClick();   
+        jFTERadioButton.doClick();  
         pack();
     }
     
@@ -42,12 +42,6 @@ public class AddNewEmployee_jFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jEmployeeNumberLabel = new javax.swing.JLabel();
-        jEmployeeNumberTextField = new javax.swing.JTextField();
-        jFirstNameLabel = new javax.swing.JLabel();
-        jFirstNameTextField = new javax.swing.JTextField();
-        jLastNameLabel = new javax.swing.JLabel();
-        jLastNameTextField = new javax.swing.JTextField();
         jAddButton = new javax.swing.JButton();
         jRemoveButton = new javax.swing.JButton();
         jResponseLabel = new javax.swing.JLabel();
@@ -55,7 +49,7 @@ public class AddNewEmployee_jFrame extends javax.swing.JFrame {
         jPTERadioButton = new javax.swing.JRadioButton();
         jFTEPanel = new javax.swing.JPanel();
         jSalaryLabel = new javax.swing.JLabel();
-        jSalaryTextField = new javax.swing.JTextField();
+        jSalaryTextField = new javax.swing.JFormattedTextField();
         jPTEPanel = new javax.swing.JPanel();
         jHourlyWageLabel = new javax.swing.JLabel();
         jHourlyWageTextField = new javax.swing.JTextField();
@@ -63,29 +57,17 @@ public class AddNewEmployee_jFrame extends javax.swing.JFrame {
         jHoursPerWeekTextField = new javax.swing.JTextField();
         jWeeksPerYearLabel = new javax.swing.JLabel();
         jWeeksPerYearTextField = new javax.swing.JTextField();
+        jMainPanel = new javax.swing.JPanel();
+        jEmployeeNumberLabel = new javax.swing.JLabel();
+        jFirstNameLabel = new javax.swing.JLabel();
+        jFirstNameTextField = new javax.swing.JTextField();
+        jLastNameLabel = new javax.swing.JLabel();
+        jLastNameTextField = new javax.swing.JTextField();
+        jEmployeeNumberTextField = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(0, 260));
         setResizable(false);
-
-        jEmployeeNumberLabel.setText("Employee Number");
-        jEmployeeNumberLabel.setToolTipText("Enter a six digit employee number (e.g. 123456)");
-
-        jEmployeeNumberTextField.setToolTipText("");
-        jEmployeeNumberTextField.setMinimumSize(new java.awt.Dimension(60, 20));
-        jEmployeeNumberTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jEmployeeNumberTextFieldActionPerformed(evt);
-            }
-        });
-
-        jFirstNameLabel.setText("First Name");
-
-        jFirstNameTextField.setMinimumSize(new java.awt.Dimension(60, 20));
-
-        jLastNameLabel.setText("Last Name");
-
-        jLastNameTextField.setMinimumSize(new java.awt.Dimension(60, 20));
 
         jAddButton.setText("Add");
         jAddButton.addActionListener(new java.awt.event.ActionListener() {
@@ -120,27 +102,31 @@ public class AddNewEmployee_jFrame extends javax.swing.JFrame {
         });
 
         jSalaryLabel.setText("Salary");
+        jSalaryLabel.setPreferredSize(new java.awt.Dimension(69, 16));
 
-        jSalaryTextField.setToolTipText("");
+        jSalaryTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jSalaryTextFieldKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jFTEPanelLayout = new javax.swing.GroupLayout(jFTEPanel);
         jFTEPanel.setLayout(jFTEPanelLayout);
         jFTEPanelLayout.setHorizontalGroup(
             jFTEPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jFTEPanelLayout.createSequentialGroup()
-                .addComponent(jSalaryLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jSalaryLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSalaryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jSalaryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jFTEPanelLayout.setVerticalGroup(
             jFTEPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jFTEPanelLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addGroup(jFTEPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jSalaryLabel)
+                    .addComponent(jSalaryLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jSalaryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(58, 58, 58))
+                .addGap(46, 46, 46))
         );
 
         jHourlyWageLabel.setText("Hourly Wage");
@@ -148,8 +134,10 @@ public class AddNewEmployee_jFrame extends javax.swing.JFrame {
         jHourlyWageLabel.setMinimumSize(new java.awt.Dimension(57, 16));
 
         jHoursPerWeekLabel.setText("Hours per week");
+        jHoursPerWeekLabel.setPreferredSize(new java.awt.Dimension(69, 16));
 
         jWeeksPerYearLabel.setText("Weeks per year");
+        jWeeksPerYearLabel.setPreferredSize(new java.awt.Dimension(69, 16));
 
         javax.swing.GroupLayout jPTEPanelLayout = new javax.swing.GroupLayout(jPTEPanel);
         jPTEPanel.setLayout(jPTEPanelLayout);
@@ -159,13 +147,13 @@ public class AddNewEmployee_jFrame extends javax.swing.JFrame {
                 .addGroup(jPTEPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jHoursPerWeekLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                     .addComponent(jWeeksPerYearLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jHourlyWageLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jHourlyWageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPTEPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jHoursPerWeekTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                    .addComponent(jHourlyWageTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                    .addComponent(jWeeksPerYearTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
-                .addGap(126, 126, 126))
+                    .addComponent(jHourlyWageTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jWeeksPerYearTextField))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPTEPanelLayout.setVerticalGroup(
             jPTEPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,13 +164,75 @@ public class AddNewEmployee_jFrame extends javax.swing.JFrame {
                     .addComponent(jHourlyWageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPTEPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jHoursPerWeekLabel)
+                    .addComponent(jHoursPerWeekLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jHoursPerWeekTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPTEPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jWeeksPerYearLabel)
+                    .addComponent(jWeeksPerYearLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jWeeksPerYearTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, 0))
+        );
+
+        jEmployeeNumberLabel.setText("Employee Number");
+        jEmployeeNumberLabel.setToolTipText("Enter a six digit employee number (e.g. 123456)");
+        jEmployeeNumberLabel.setPreferredSize(new java.awt.Dimension(69, 16));
+
+        jFirstNameLabel.setText("First Name");
+        jFirstNameLabel.setPreferredSize(new java.awt.Dimension(69, 16));
+
+        jFirstNameTextField.setMinimumSize(new java.awt.Dimension(60, 20));
+        jFirstNameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFirstNameTextFieldActionPerformed(evt);
+            }
+        });
+
+        jLastNameLabel.setText("Last Name");
+        jLastNameLabel.setPreferredSize(new java.awt.Dimension(69, 16));
+
+        jLastNameTextField.setMinimumSize(new java.awt.Dimension(60, 20));
+
+        try {
+            javax.swing.text.MaskFormatter formatter = new javax.swing.text.MaskFormatter("*********");
+            formatter.setPlaceholderCharacter(' ');
+            formatter.setValidCharacters("1234567890 ");
+            jEmployeeNumberTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(formatter));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        javax.swing.GroupLayout jMainPanelLayout = new javax.swing.GroupLayout(jMainPanel);
+        jMainPanel.setLayout(jMainPanelLayout);
+        jMainPanelLayout.setHorizontalGroup(
+            jMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jMainPanelLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addGroup(jMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jFirstNameLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                    .addComponent(jLastNameLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jEmployeeNumberLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jFirstNameTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                    .addComponent(jLastNameTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jEmployeeNumberTextField))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jMainPanelLayout.setVerticalGroup(
+            jMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jMainPanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jEmployeeNumberLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jEmployeeNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jFirstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFirstNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLastNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -192,53 +242,38 @@ public class AddNewEmployee_jFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jEmployeeNumberLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jFirstNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLastNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jFirstNameTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                            .addComponent(jLastNameTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jEmployeeNumberTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jFTERadioButton)
-                            .addComponent(jPTERadioButton)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jAddButton)
-                        .addGap(41, 41, 41)
-                        .addComponent(jRemoveButton)
-                        .addGap(38, 38, 38)
-                        .addComponent(jResponseLabel))
                     .addComponent(jFTEPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPTEPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPTEPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jMainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jFTERadioButton)
+                                .addComponent(jPTERadioButton)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jAddButton)
+                            .addGap(41, 41, 41)
+                            .addComponent(jRemoveButton)
+                            .addGap(38, 38, 38)
+                            .addComponent(jResponseLabel))))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jEmployeeNumberLabel)
-                    .addComponent(jEmployeeNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFTERadioButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jFirstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFirstNameLabel)
-                    .addComponent(jPTERadioButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLastNameLabel))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jMainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jFTERadioButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPTERadioButton)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jFTEPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPTEPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jAddButton)
                     .addComponent(jRemoveButton)
@@ -246,14 +281,13 @@ public class AddNewEmployee_jFrame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jEmployeeNumberTextField.getAccessibleContext().setAccessibleName("");
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     
     private void jAddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAddButtonActionPerformed
         if (jFTERadioButton.isSelected()) {
+            System.out.println(String.join("", getField(FTEFieldArray)));
             employeeTable.add(new FTE(getField(FTEFieldArray)));
             clearField(FTEFieldArray);
         }
@@ -278,9 +312,13 @@ public class AddNewEmployee_jFrame extends javax.swing.JFrame {
         jPTEPanel.setVisible(true);
     }//GEN-LAST:event_clickedPTERadioButton
 
-    private void jEmployeeNumberTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEmployeeNumberTextFieldActionPerformed
+    private void jFirstNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFirstNameTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jEmployeeNumberTextFieldActionPerformed
+    }//GEN-LAST:event_jFirstNameTextFieldActionPerformed
+
+    private void jSalaryTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jSalaryTextFieldKeyPressed
+        jSalaryTextField.setText(jSalaryTextField.getText().substring(0, Math.min(jSalaryTextField.getText().length(), 9)));
+    }//GEN-LAST:event_jSalaryTextFieldKeyPressed
  
     /**
      * @param args the command line arguments
@@ -290,7 +328,7 @@ public class AddNewEmployee_jFrame extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jAddButton;
     private javax.swing.JLabel jEmployeeNumberLabel;
-    private javax.swing.JTextField jEmployeeNumberTextField;
+    private javax.swing.JFormattedTextField jEmployeeNumberTextField;
     private javax.swing.JPanel jFTEPanel;
     private javax.swing.JRadioButton jFTERadioButton;
     private javax.swing.JLabel jFirstNameLabel;
@@ -301,12 +339,13 @@ public class AddNewEmployee_jFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jHoursPerWeekTextField;
     private javax.swing.JLabel jLastNameLabel;
     private javax.swing.JTextField jLastNameTextField;
+    private javax.swing.JPanel jMainPanel;
     private javax.swing.JPanel jPTEPanel;
     private javax.swing.JRadioButton jPTERadioButton;
     private javax.swing.JButton jRemoveButton;
     private javax.swing.JLabel jResponseLabel;
     private javax.swing.JLabel jSalaryLabel;
-    private javax.swing.JTextField jSalaryTextField;
+    private javax.swing.JFormattedTextField jSalaryTextField;
     private javax.swing.JLabel jWeeksPerYearLabel;
     private javax.swing.JTextField jWeeksPerYearTextField;
     // End of variables declaration//GEN-END:variables

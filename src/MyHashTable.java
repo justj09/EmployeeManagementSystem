@@ -50,10 +50,10 @@ public class MyHashTable {
                 Boolean b = item.firstName.contains(query);
                 Boolean c = item.lastName.contains(query);
                 if ((a || b || c) && a){
-                    
+                   System.out.println("a"); 
                 }
             }
-        return null;
         }
+        return null;
     }
 }

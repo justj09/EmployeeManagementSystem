@@ -31,68 +31,50 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jEmployeeNumberLabel" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jFirstNameLabel" alignment="0" min="-2" pref="99" max="-2" attributes="0"/>
+                  <Component id="jFTEPanel" min="-2" max="-2" attributes="0"/>
+                  <Component id="jPTEPanel" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jMainPanel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="84" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jFTERadioButton" min="-2" max="-2" attributes="0"/>
+                              <Component id="jPTERadioButton" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jLastNameLabel" alignment="0" min="-2" pref="99" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="jFirstNameTextField" alignment="0" pref="100" max="32767" attributes="0"/>
-                          <Component id="jLastNameTextField" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jEmployeeNumberTextField" pref="100" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jFTERadioButton" min="-2" max="-2" attributes="0"/>
-                          <Component id="jPTERadioButton" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jAddButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                          <Component id="jRemoveButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                          <Component id="jResponseLabel" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jAddButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                      <Component id="jRemoveButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                      <Component id="jResponseLabel" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="jFTEPanel" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jPTEPanel" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="17" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jEmployeeNumberLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jEmployeeNumberTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jFTERadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jFirstNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jFirstNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jPTERadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLastNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLastNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jMainPanel" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="jFTERadioButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jPTERadioButton" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jFTEPanel" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jPTEPanel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace pref="32" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jAddButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jRemoveButton" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -104,50 +86,6 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="jEmployeeNumberLabel">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Employee Number"/>
-        <Property name="toolTipText" type="java.lang.String" value="Enter a six digit employee number (e.g. 123456)"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="jEmployeeNumberTextField">
-      <Properties>
-        <Property name="toolTipText" type="java.lang.String" value=""/>
-        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[60, 20]"/>
-        </Property>
-      </Properties>
-      <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value=""/>
-      </AccessibilityProperties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jEmployeeNumberTextFieldActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jFirstNameLabel">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="First Name"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="jFirstNameTextField">
-      <Properties>
-        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[60, 20]"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLastNameLabel">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Last Name"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="jLastNameTextField">
-      <Properties>
-        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[60, 20]"/>
-        </Property>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JButton" name="jAddButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Add"/>
@@ -197,10 +135,9 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <Component id="jSalaryLabel" min="-2" pref="99" max="-2" attributes="0"/>
+                  <Component id="jSalaryLabel" min="-2" pref="100" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jSalaryTextField" min="-2" pref="100" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -212,7 +149,7 @@
                       <Component id="jSalaryLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jSalaryTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -221,12 +158,15 @@
         <Component class="javax.swing.JLabel" name="jSalaryLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Salary"/>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[69, 16]"/>
+            </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jSalaryTextField">
-          <Properties>
-            <Property name="toolTipText" type="java.lang.String" value=""/>
-          </Properties>
+        <Component class="javax.swing.JFormattedTextField" name="jSalaryTextField">
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jSalaryTextFieldKeyPressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -239,15 +179,15 @@
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jHoursPerWeekLabel" pref="100" max="32767" attributes="0"/>
                       <Component id="jWeeksPerYearLabel" max="32767" attributes="0"/>
-                      <Component id="jHourlyWageLabel" alignment="1" max="32767" attributes="0"/>
+                      <Component id="jHourlyWageLabel" alignment="0" pref="100" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                       <Component id="jHoursPerWeekTextField" alignment="0" pref="100" max="32767" attributes="0"/>
-                      <Component id="jHourlyWageTextField" alignment="0" pref="100" max="32767" attributes="0"/>
-                      <Component id="jWeeksPerYearTextField" pref="100" max="32767" attributes="0"/>
+                      <Component id="jHourlyWageTextField" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jWeeksPerYearTextField" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="126" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -291,6 +231,9 @@
         <Component class="javax.swing.JLabel" name="jHoursPerWeekLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Hours per week"/>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[69, 16]"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jHoursPerWeekTextField">
@@ -298,9 +241,108 @@
         <Component class="javax.swing.JLabel" name="jWeeksPerYearLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Weeks per year"/>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[69, 16]"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jWeeksPerYearTextField">
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="jMainPanel">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="jFirstNameLabel" alignment="0" pref="100" max="32767" attributes="0"/>
+                      <Component id="jLastNameLabel" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jEmployeeNumberLabel" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="jFirstNameTextField" alignment="0" pref="100" max="32767" attributes="0"/>
+                      <Component id="jLastNameTextField" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jEmployeeNumberTextField" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jEmployeeNumberLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jEmployeeNumberTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jFirstNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jFirstNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLastNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLastNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="jEmployeeNumberLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Employee Number"/>
+            <Property name="toolTipText" type="java.lang.String" value="Enter a six digit employee number (e.g. 123456)"/>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[69, 16]"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jFirstNameLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="First Name"/>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[69, 16]"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jFirstNameTextField">
+          <Properties>
+            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[60, 20]"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFirstNameTextFieldActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLastNameLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Last Name"/>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[69, 16]"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jLastNameTextField">
+          <Properties>
+            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[60, 20]"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JFormattedTextField" name="jEmployeeNumberTextField">
+          <Properties>
+            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.RADConnectionPropertyEditor" preCode="try {&#xa;javax.swing.text.MaskFormatter formatter = new javax.swing.text.MaskFormatter(&quot;*********&quot;);&#xa;formatter.setPlaceholderCharacter(&apos; &apos;);&#xa;formatter.setValidCharacters(&quot;1234567890 &quot;);" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
+              <Connection code="new javax.swing.text.DefaultFormatterFactory(formatter)" type="code"/>
+            </Property>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
