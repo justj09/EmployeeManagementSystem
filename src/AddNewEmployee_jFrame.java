@@ -104,9 +104,15 @@ public class AddNewEmployee_jFrame extends javax.swing.JFrame {
         jSalaryLabel.setText("Salary");
         jSalaryLabel.setPreferredSize(new java.awt.Dimension(69, 16));
 
-        jSalaryTextField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jSalaryTextFieldKeyPressed(evt);
+        jSalaryTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        jSalaryTextField.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                jSalaryTextFieldCaretUpdate(evt);
+            }
+        });
+        jSalaryTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jSalaryTextFieldActionPerformed(evt);
             }
         });
 
@@ -192,14 +198,10 @@ public class AddNewEmployee_jFrame extends javax.swing.JFrame {
 
         jLastNameTextField.setMinimumSize(new java.awt.Dimension(60, 20));
 
-        try {
-            javax.swing.text.MaskFormatter formatter = new javax.swing.text.MaskFormatter("*********");
-            formatter.setPlaceholderCharacter(' ');
-            formatter.setValidCharacters("1234567890 ");
-            jEmployeeNumberTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(formatter));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
+        java.text.DecimalFormat employeeNumberFormat = new java.text.DecimalFormat("#0");
+        employeeNumberFormat.setMaximumIntegerDigits(9);
+        new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(employeeNumberFormat)).
+        jEmployeeNumberTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(employeeNumberFormat)));
 
         javax.swing.GroupLayout jMainPanelLayout = new javax.swing.GroupLayout(jMainPanel);
         jMainPanel.setLayout(jMainPanelLayout);
@@ -316,9 +318,13 @@ public class AddNewEmployee_jFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jFirstNameTextFieldActionPerformed
 
-    private void jSalaryTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jSalaryTextFieldKeyPressed
+    private void jSalaryTextFieldCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jSalaryTextFieldCaretUpdate
         jSalaryTextField.setText(jSalaryTextField.getText().substring(0, Math.min(jSalaryTextField.getText().length(), 9)));
-    }//GEN-LAST:event_jSalaryTextFieldKeyPressed
+    }//GEN-LAST:event_jSalaryTextFieldCaretUpdate
+
+    private void jSalaryTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSalaryTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jSalaryTextFieldActionPerformed
  
     /**
      * @param args the command line arguments
