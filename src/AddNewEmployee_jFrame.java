@@ -191,10 +191,33 @@ public class AddNewEmployee_jFrame extends javax.swing.JFrame {
             }
         });
 
-        jHoursPerWeekTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        javax.swing.text.NumberFormatter hoursPerWeekFormatter = new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"));
+        hoursPerWeekFormatter.setAllowsInvalid(false);
+        hoursPerWeekFormatter.setCommitsOnValidEdit(true);
+        hoursPerWeekFormatter.setOverwriteMode(false);
+        hoursPerWeekFormatter.setMinimum(0);
+        hoursPerWeekFormatter.setMaximum(168);
+        jHoursPerWeekTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(hoursPerWeekFormatter));
         jHoursPerWeekTextField.setText("0");
+        jHoursPerWeekTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jIntegerTextFieldKeyPressed(evt);
+            }
+        });
 
+        javax.swing.text.NumberFormatter weeksPerYearFormatter = new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"));
+        weeksPerYearFormatter.setAllowsInvalid(false);
+        weeksPerYearFormatter.setCommitsOnValidEdit(true);
+        weeksPerYearFormatter.setOverwriteMode(false);
+        weeksPerYearFormatter.setMinimum(0);
+        weeksPerYearFormatter.setMaximum(52);
+        jWeeksPerYearTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(weeksPerYearFormatter));
         jWeeksPerYearTextField.setText("0");
+        jWeeksPerYearTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jIntegerTextFieldKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPTEPanelLayout = new javax.swing.GroupLayout(jPTEPanel);
         jPTEPanel.setLayout(jPTEPanelLayout);
