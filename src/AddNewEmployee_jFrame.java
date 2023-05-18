@@ -373,7 +373,7 @@ public class AddNewEmployee_jFrame extends javax.swing.JFrame {
         javax.swing.JTextField field = (javax.swing.JTextField)evt.getSource();
         if (field.getText().length() == 1) {
             if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_BACK_SPACE && field.getCaretPosition() == 1 && !field.getText().equals("0")){
-
+                evt.consume();
                 field.setText("0");
             }
             else if (field.getText().equals("0") && "0123456789".contains(Character.toString(evt.getKeyChar()))){
