@@ -1,16 +1,18 @@
 import javax.swing.*;
-import java.lang.Math.*;
+import java.util.*;
 
 public class AddNewEmployee_jFrame extends javax.swing.JFrame {
     public MyHashTable employeeTable;  // This contains the ref value for theHT of MainJFrame.
     public javax.swing.JTextField[] FTEFieldArray;
     public javax.swing.JTextField[] PTEFieldArray;
+    public Map<javax.swing.JTextField, String> textFieldType;
     
     public AddNewEmployee_jFrame(MyHashTable employeeTable) {
         initComponents();
         this.employeeTable = employeeTable;
         this.FTEFieldArray = new JTextField[]{jEmployeeNumberTextField, jFirstNameTextField, jLastNameTextField, jSalaryTextField};
         this.PTEFieldArray = new JTextField[]{jEmployeeNumberTextField, jFirstNameTextField, jLastNameTextField, jHourlyWageTextField, jHoursPerWeekTextField, jWeeksPerYearTextField};
+        this.textFieldType = Map.of(jEmployeeNumberTextField, "0", jFirstNameTextField,"", jLastNameTextField, "", jSalaryTextField, "2.00", jHourlyWageTextField, "$0.00", jHoursPerWeekTextField, "0", jWeeksPerYearTextField, "0");
         clearField(FTEFieldArray);
         clearField(PTEFieldArray);
         jResponseLabel.setVisible(false); // Hide the Added new employee message
@@ -20,7 +22,7 @@ public class AddNewEmployee_jFrame extends javax.swing.JFrame {
     
     public void clearField(javax.swing.JTextField[] array){
         for (javax.swing.JTextField textField: array){
-            textField.setText("");
+            textField.setText(textFieldType.get(textField));
         }
     }
     
@@ -109,11 +111,6 @@ public class AddNewEmployee_jFrame extends javax.swing.JFrame {
         jFirstNameLabel.setPreferredSize(new java.awt.Dimension(69, 16));
 
         jFirstNameTextField.setMinimumSize(new java.awt.Dimension(60, 20));
-        jFirstNameTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFirstNameTextFieldActionPerformed(evt);
-            }
-        });
 
         jLastNameLabel.setText("Last Name");
         jLastNameLabel.setPreferredSize(new java.awt.Dimension(69, 16));
@@ -169,11 +166,6 @@ public class AddNewEmployee_jFrame extends javax.swing.JFrame {
         jWeeksPerYearLabel.setPreferredSize(new java.awt.Dimension(69, 16));
 
         jWeeksPerYearTextField.setText("0");
-        jWeeksPerYearTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jWeeksPerYearTextFieldActionPerformed(evt);
-            }
-        });
 
         javax.swing.text.NumberFormatter hourlyWageFormatter = new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance());
         hourlyWageFormatter.setAllowsInvalid(false);
@@ -184,11 +176,6 @@ public class AddNewEmployee_jFrame extends javax.swing.JFrame {
         jHourlyWageTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(hourlyWageFormatter));
         jHourlyWageTextField.setText("$0.00");
         jHourlyWageTextField.setToolTipText("");
-        jHourlyWageTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jHourlyWageTextFieldActionPerformed(evt);
-            }
-        });
         jHourlyWageTextField.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 jDoubleTextFieldPropertyChange(evt);
@@ -238,11 +225,6 @@ public class AddNewEmployee_jFrame extends javax.swing.JFrame {
         jSalaryTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(salaryFormatter));
         jSalaryTextField.setText("$0.00");
         jSalaryTextField.setToolTipText("");
-        jSalaryTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jSalaryTextFieldActionPerformed(evt);
-            }
-        });
         jSalaryTextField.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 jSalaryTextFieldjDoubleTextFieldPropertyChange(evt);
@@ -322,7 +304,6 @@ public class AddNewEmployee_jFrame extends javax.swing.JFrame {
 
     private void jAddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAddButtonActionPerformed
         if (jFTERadioButton.isSelected()) {
-            System.out.println(String.join("", getField(FTEFieldArray)));
             employeeTable.add(new FTE(getField(FTEFieldArray)));
             clearField(FTEFieldArray);
         }
@@ -334,14 +315,12 @@ public class AddNewEmployee_jFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jAddButtonActionPerformed
 
     private void jExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jExitButtonActionPerformed
-          this.dispose();
+        this.dispose();
     }//GEN-LAST:event_jExitButtonActionPerformed
 
     private void clickedFTERadioButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clickedFTERadioButton
         jPTEPanel.setVisible(false);
         jFTEPanel.setVisible(true);
-        jSalaryTextField.setText("0.00");
-        jHourlyWageTextField.setText("0.00");
     }//GEN-LAST:event_clickedFTERadioButton
 
     private void clickedPTERadioButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clickedPTERadioButton
@@ -349,28 +328,12 @@ public class AddNewEmployee_jFrame extends javax.swing.JFrame {
         jPTEPanel.setVisible(true);
     }//GEN-LAST:event_clickedPTERadioButton
 
-    private void jFirstNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFirstNameTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFirstNameTextFieldActionPerformed
-
-    private void jWeeksPerYearTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jWeeksPerYearTextFieldActionPerformed
-       // TODO add your handling code here:
-    }//GEN-LAST:event_jWeeksPerYearTextFieldActionPerformed
-
     private void jDoubleTextFieldPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDoubleTextFieldPropertyChange
         if (evt.getPropertyName().equals("value") && evt.getOldValue().equals(0.0)){
             System.out.println(evt.getNewValue().getClass());
             double x = (double) evt.getNewValue();
         }
     }//GEN-LAST:event_jDoubleTextFieldPropertyChange
-
-    private void jHourlyWageTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jHourlyWageTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jHourlyWageTextFieldActionPerformed
-
-    private void jSalaryTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSalaryTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jSalaryTextFieldActionPerformed
 
     private void jSalaryTextFieldjDoubleTextFieldPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jSalaryTextFieldjDoubleTextFieldPropertyChange
         // TODO add your handling code here:
