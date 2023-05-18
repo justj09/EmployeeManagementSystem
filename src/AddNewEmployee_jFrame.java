@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.util.*;
+import java.lang.Math.*;
 
 public class AddNewEmployee_jFrame extends javax.swing.JFrame {
     public MyHashTable employeeTable;  // This contains the ref value for theHT of MainJFrame.
@@ -12,7 +13,7 @@ public class AddNewEmployee_jFrame extends javax.swing.JFrame {
         this.employeeTable = employeeTable;
         this.FTEFieldArray = new JTextField[]{jEmployeeNumberTextField, jFirstNameTextField, jLastNameTextField, jSalaryTextField};
         this.PTEFieldArray = new JTextField[]{jEmployeeNumberTextField, jFirstNameTextField, jLastNameTextField, jHourlyWageTextField, jHoursPerWeekTextField, jWeeksPerYearTextField};
-        this.textFieldType = Map.of(jEmployeeNumberTextField, "0", jFirstNameTextField,"", jLastNameTextField, "", jSalaryTextField, "2.00", jHourlyWageTextField, "$0.00", jHoursPerWeekTextField, "0", jWeeksPerYearTextField, "0");
+        this.textFieldType = Map.of(jEmployeeNumberTextField, "0", jFirstNameTextField,"", jLastNameTextField, "", jSalaryTextField, "0", jHourlyWageTextField, "0", jHoursPerWeekTextField, "0", jWeeksPerYearTextField, "0");
         clearField(FTEFieldArray);
         clearField(PTEFieldArray);
         jResponseLabel.setVisible(false); // Hide the Added new employee message
@@ -171,8 +172,8 @@ public class AddNewEmployee_jFrame extends javax.swing.JFrame {
         hourlyWageFormatter.setAllowsInvalid(false);
         hourlyWageFormatter.setCommitsOnValidEdit(true);
         hourlyWageFormatter.setOverwriteMode(false);
-        hourlyWageFormatter.setMinimum(-0.001);
-        hourlyWageFormatter.setMaximum(Double.MAX_VALUE);
+        hourlyWageFormatter.setMinimum(0.0);
+        hourlyWageFormatter.setMaximum(999999999.0);
         jHourlyWageTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(hourlyWageFormatter));
         jHourlyWageTextField.setText("$0.00");
         jHourlyWageTextField.setToolTipText("");
@@ -220,14 +221,14 @@ public class AddNewEmployee_jFrame extends javax.swing.JFrame {
         salaryFormatter.setAllowsInvalid(false);
         salaryFormatter.setCommitsOnValidEdit(true);
         salaryFormatter.setOverwriteMode(false);
-        salaryFormatter.setMinimum(-0.001);
-        salaryFormatter.setMaximum(Double.MAX_VALUE);
+        salaryFormatter.setMinimum(0.0);
+        salaryFormatter.setMaximum(999999999.0);
         jSalaryTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(salaryFormatter));
         jSalaryTextField.setText("$0.00");
         jSalaryTextField.setToolTipText("");
         jSalaryTextField.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                jSalaryTextFieldjDoubleTextFieldPropertyChange(evt);
+                jDoubleTextFieldPropertyChange(evt);
             }
         });
 
@@ -262,19 +263,18 @@ public class AddNewEmployee_jFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jFTEPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPTEPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jAddButton)
-                            .addGap(30, 30, 30)
-                            .addComponent(jRemoveButton)
-                            .addGap(30, 30, 30)
-                            .addComponent(jResponseLabel))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jMainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(20, 20, 20)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jPTERadioButton)
-                                .addComponent(jFTERadioButton)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jAddButton)
+                        .addGap(30, 30, 30)
+                        .addComponent(jRemoveButton)
+                        .addGap(30, 30, 30)
+                        .addComponent(jResponseLabel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jMainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPTERadioButton)
+                            .addComponent(jFTERadioButton))))
                 .addGap(15, 15, 15))
         );
         layout.setVerticalGroup(
@@ -329,15 +329,26 @@ public class AddNewEmployee_jFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_clickedPTERadioButton
 
     private void jDoubleTextFieldPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDoubleTextFieldPropertyChange
-        if (evt.getPropertyName().equals("value") && evt.getOldValue().equals(0.0)){
-            System.out.println(evt.getNewValue().getClass());
-            double x = (double) evt.getNewValue();
+        if (evt.getPropertyName().equals("value")){
+            javax.swing.JTextField field = (javax.swing.JTextField)evt.getSource();
+            if (evt.getOldValue().equals(0.0) && (double)evt.getNewValue() % 1 == 0.0){
+                field.setText(evt.getNewValue().toString().replace("0", ""));
+            }
+            else if ((double)evt.getNewValue()/100 == (double)evt.getOldValue()){
+                String t = evt.getOldValue().toString();
+                field.setText(t.substring(0, t.indexOf(".") - 1) + t.substring(t.indexOf(".")));
+            }
+            else {
+                return;
+            }
+            javax.swing.SwingUtilities.invokeLater(new Runnable() {
+                public void run() {
+                    field.setCaretPosition(field.getText().length() - 3);
+                }
+            });
+            
         }
     }//GEN-LAST:event_jDoubleTextFieldPropertyChange
-
-    private void jSalaryTextFieldjDoubleTextFieldPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jSalaryTextFieldjDoubleTextFieldPropertyChange
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jSalaryTextFieldjDoubleTextFieldPropertyChange
 
     /**
      * @param args the command line arguments

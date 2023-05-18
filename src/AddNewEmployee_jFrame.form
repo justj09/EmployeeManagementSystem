@@ -312,7 +312,7 @@
             <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="jDoubleTextFieldPropertyChange"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="javax.swing.text.NumberFormatter hourlyWageFormatter = new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance()); &#xa;hourlyWageFormatter.setAllowsInvalid(false); &#xa;hourlyWageFormatter.setCommitsOnValidEdit(true);&#xa;hourlyWageFormatter.setOverwriteMode(false);&#xa;hourlyWageFormatter.setMinimum(-0.001); &#xa;hourlyWageFormatter.setMaximum(Double.MAX_VALUE);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="javax.swing.text.NumberFormatter hourlyWageFormatter = new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance()); &#xa;hourlyWageFormatter.setAllowsInvalid(false); &#xa;hourlyWageFormatter.setCommitsOnValidEdit(true);&#xa;hourlyWageFormatter.setOverwriteMode(false);&#xa;hourlyWageFormatter.setMinimum(0.0); &#xa;hourlyWageFormatter.setMaximum(999999999.0);"/>
           </AuxValues>
         </Component>
       </SubComponents>
@@ -352,10 +352,10 @@
             <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
           <Events>
-            <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="jSalaryTextFieldjDoubleTextFieldPropertyChange"/>
+            <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="jDoubleTextFieldPropertyChange"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="javax.swing.text.NumberFormatter salaryFormatter = new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance()); &#xa;salaryFormatter.setAllowsInvalid(false); &#xa;salaryFormatter.setCommitsOnValidEdit(true);&#xa;salaryFormatter.setOverwriteMode(false);&#xa;salaryFormatter.setMinimum(-0.001); &#xa;salaryFormatter.setMaximum(Double.MAX_VALUE);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="javax.swing.text.NumberFormatter salaryFormatter = new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance()); &#xa;salaryFormatter.setAllowsInvalid(false); &#xa;salaryFormatter.setCommitsOnValidEdit(true);&#xa;salaryFormatter.setOverwriteMode(false);&#xa;salaryFormatter.setMinimum(0.0);&#xa;salaryFormatter.setMaximum(999999999.0);"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="jSalaryLabel">
