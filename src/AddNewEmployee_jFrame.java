@@ -30,7 +30,7 @@ public class AddNewEmployee_jFrame extends javax.swing.JFrame {
     public String[] getField(javax.swing.JTextField[] array){
         String[] output = new String[array.length];
         for (int i = 0; i < array.length; i++){
-            output[i] = array[i].getText();
+            output[i] = array[i].getText().replaceAll("[$,]", "");
         }
         return output;
     }
@@ -56,14 +56,14 @@ public class AddNewEmployee_jFrame extends javax.swing.JFrame {
         jFirstNameTextField = new javax.swing.JTextField();
         jLastNameLabel = new javax.swing.JLabel();
         jLastNameTextField = new javax.swing.JTextField();
-        jEmployeeNumberTextField = new javax.swing.JTextField();
+        jEmployeeNumberTextField = new javax.swing.JFormattedTextField();
         jPTEPanel = new javax.swing.JPanel();
         jHourlyWageLabel = new javax.swing.JLabel();
         jHoursPerWeekLabel = new javax.swing.JLabel();
-        jHoursPerWeekTextField = new javax.swing.JTextField();
         jWeeksPerYearLabel = new javax.swing.JLabel();
-        jWeeksPerYearTextField = new javax.swing.JTextField();
         jHourlyWageTextField = new javax.swing.JFormattedTextField();
+        jHoursPerWeekTextField = new javax.swing.JFormattedTextField();
+        jWeeksPerYearTextField = new javax.swing.JFormattedTextField();
         jFTEPanel = new javax.swing.JPanel();
         jSalaryTextField = new javax.swing.JFormattedTextField();
         jSalaryLabel = new javax.swing.JLabel();
@@ -118,7 +118,19 @@ public class AddNewEmployee_jFrame extends javax.swing.JFrame {
 
         jLastNameTextField.setMinimumSize(new java.awt.Dimension(60, 20));
 
+        javax.swing.text.NumberFormatter employeeNumberFormatter = new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"));
+        employeeNumberFormatter.setAllowsInvalid(false);
+        employeeNumberFormatter.setCommitsOnValidEdit(true);
+        employeeNumberFormatter.setOverwriteMode(false);
+        employeeNumberFormatter.setMinimum(0);
+        employeeNumberFormatter.setMaximum(999999999);
+        jEmployeeNumberTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(employeeNumberFormatter));
         jEmployeeNumberTextField.setText("0");
+        jEmployeeNumberTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jIntegerTextFieldKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jMainPanelLayout = new javax.swing.GroupLayout(jMainPanel);
         jMainPanel.setLayout(jMainPanelLayout);
@@ -132,9 +144,9 @@ public class AddNewEmployee_jFrame extends javax.swing.JFrame {
                     .addComponent(jEmployeeNumberLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jFirstNameTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFirstNameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLastNameTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jEmployeeNumberTextField))
+                    .addComponent(jEmployeeNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jMainPanelLayout.setVerticalGroup(
@@ -161,12 +173,8 @@ public class AddNewEmployee_jFrame extends javax.swing.JFrame {
         jHoursPerWeekLabel.setText("Hours per week");
         jHoursPerWeekLabel.setPreferredSize(new java.awt.Dimension(69, 16));
 
-        jHoursPerWeekTextField.setText("0");
-
         jWeeksPerYearLabel.setText("Weeks per year");
         jWeeksPerYearLabel.setPreferredSize(new java.awt.Dimension(69, 16));
-
-        jWeeksPerYearTextField.setText("0");
 
         javax.swing.text.NumberFormatter hourlyWageFormatter = new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance());
         hourlyWageFormatter.setAllowsInvalid(false);
@@ -183,6 +191,11 @@ public class AddNewEmployee_jFrame extends javax.swing.JFrame {
             }
         });
 
+        jHoursPerWeekTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        jHoursPerWeekTextField.setText("0");
+
+        jWeeksPerYearTextField.setText("0");
+
         javax.swing.GroupLayout jPTEPanelLayout = new javax.swing.GroupLayout(jPTEPanel);
         jPTEPanel.setLayout(jPTEPanelLayout);
         jPTEPanelLayout.setHorizontalGroup(
@@ -193,11 +206,16 @@ public class AddNewEmployee_jFrame extends javax.swing.JFrame {
                     .addComponent(jWeeksPerYearLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jHourlyWageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPTEPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jHoursPerWeekTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                    .addComponent(jWeeksPerYearTextField)
-                    .addComponent(jHourlyWageTextField, javax.swing.GroupLayout.Alignment.LEADING))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(jPTEPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPTEPanelLayout.createSequentialGroup()
+                        .addComponent(jHourlyWageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPTEPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPTEPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jWeeksPerYearTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jHoursPerWeekTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())))
         );
         jPTEPanelLayout.setVerticalGroup(
             jPTEPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,7 +232,7 @@ public class AddNewEmployee_jFrame extends javax.swing.JFrame {
                 .addGroup(jPTEPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jWeeksPerYearLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jWeeksPerYearTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, 0))
+                .addGap(3, 3, 3))
         );
 
         javax.swing.text.NumberFormatter salaryFormatter = new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance());
@@ -261,37 +279,39 @@ public class AddNewEmployee_jFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jFTEPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jMainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jFTEPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPTERadioButton)
+                            .addComponent(jFTERadioButton)))
                     .addComponent(jPTEPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jAddButton)
                         .addGap(30, 30, 30)
                         .addComponent(jRemoveButton)
                         .addGap(30, 30, 30)
-                        .addComponent(jResponseLabel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jMainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPTERadioButton)
-                            .addComponent(jFTERadioButton))))
-                .addGap(15, 15, 15))
+                        .addComponent(jResponseLabel)))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jMainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jMainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jFTEPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jFTERadioButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPTERadioButton)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jFTEPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPTEPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jAddButton)
                     .addComponent(jRemoveButton)
@@ -349,6 +369,18 @@ public class AddNewEmployee_jFrame extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_jDoubleTextFieldPropertyChange
+    private void jIntegerTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jIntegerTextFieldKeyPressed
+        javax.swing.JTextField field = (javax.swing.JTextField)evt.getSource();
+        if (field.getText().length() == 1) {
+            if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_BACK_SPACE && field.getCaretPosition() == 1 && !field.getText().equals("0")){
+
+                field.setText("0");
+            }
+            else if (field.getText().equals("0") && "0123456789".contains(Character.toString(evt.getKeyChar()))){
+                field.setText("0");
+            }
+        }
+    }//GEN-LAST:event_jIntegerTextFieldKeyPressed
 
     /**
      * @param args the command line arguments
@@ -358,7 +390,7 @@ public class AddNewEmployee_jFrame extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jAddButton;
     private javax.swing.JLabel jEmployeeNumberLabel;
-    private javax.swing.JTextField jEmployeeNumberTextField;
+    private javax.swing.JFormattedTextField jEmployeeNumberTextField;
     private javax.swing.JPanel jFTEPanel;
     private javax.swing.JRadioButton jFTERadioButton;
     private javax.swing.JLabel jFirstNameLabel;
@@ -366,7 +398,7 @@ public class AddNewEmployee_jFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jHourlyWageLabel;
     private javax.swing.JFormattedTextField jHourlyWageTextField;
     private javax.swing.JLabel jHoursPerWeekLabel;
-    private javax.swing.JTextField jHoursPerWeekTextField;
+    private javax.swing.JFormattedTextField jHoursPerWeekTextField;
     private javax.swing.JLabel jLastNameLabel;
     private javax.swing.JTextField jLastNameTextField;
     private javax.swing.JPanel jMainPanel;
@@ -377,6 +409,6 @@ public class AddNewEmployee_jFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jSalaryLabel;
     private javax.swing.JFormattedTextField jSalaryTextField;
     private javax.swing.JLabel jWeeksPerYearLabel;
-    private javax.swing.JTextField jWeeksPerYearTextField;
+    private javax.swing.JFormattedTextField jWeeksPerYearTextField;
     // End of variables declaration//GEN-END:variables
 }
