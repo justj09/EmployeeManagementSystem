@@ -23,7 +23,7 @@ public class Main_jFrame extends javax.swing.JFrame {
         jSearchButton = new javax.swing.JButton();
         jScrollPane = new javax.swing.JScrollPane();
         jTable = new javax.swing.JTable();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jSearchComboBox = new javax.swing.JComboBox<>();
         jSearchTextField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
@@ -73,11 +73,22 @@ public class Main_jFrame extends javax.swing.JFrame {
         ));
         jTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jTable.setAutoscrolls(false);
+        jTable.setColumnSelectionAllowed(true);
+        jTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTable.setRowSelectionAllowed(true);
+        jTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        jTable.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jTablePropertyChange(evt);
+            }
+        });
         jScrollPane.setViewportView(jTable);
+        jTable.getAccessibleContext().setAccessibleName("");
+        jTable.getAccessibleContext().setAccessibleDescription("");
 
-        jComboBox2.setMaximumRowCount(3);
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Employee Number", "First Name", "Last Name" }));
-        jComboBox2.setToolTipText("");
+        jSearchComboBox.setMaximumRowCount(3);
+        jSearchComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Employee Number", "First Name", "Last Name" }));
+        jSearchComboBox.setToolTipText("");
 
         jSearchTextField.setToolTipText("");
         jSearchTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -101,7 +112,7 @@ public class Main_jFrame extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSearchComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addComponent(jSearchTextField)
@@ -120,7 +131,7 @@ public class Main_jFrame extends javax.swing.JFrame {
                 .addComponent(jAddEmployeeButton)
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSearchComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,7 +142,7 @@ public class Main_jFrame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jComboBox2.getAccessibleContext().setAccessibleName("");
+        jSearchComboBox.getAccessibleContext().setAccessibleName("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -197,26 +208,28 @@ public class Main_jFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jLoadFileButtonActionPerformed
 
     private void jSearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSearchButtonActionPerformed
-        int num = employeeTable.size;
+        ArrayList<EmployeeInfo> list = employeeTable.retrieveAll(jSearchComboBox.getSelectedIndex(), jSearchTextField.getText());
+        int num = list.size();
         int row = 0;
         model = new DefaultTableModel(new Object[] {"Status", "Emp Num", "First Name", "Last Name"}, num);
         jTable.setModel(model);
         jTable.setAutoCreateColumnsFromModel(true);
-        System.out.println("Here are the employees:");
-        for (ArrayList<EmployeeInfo> bucket : employeeTable.buckets) {
-            for (EmployeeInfo employee : bucket) {
-                model.setValueAt(employee instanceof FTE ? "Full Time" : "Part Time", row, 0);
-                model.setValueAt(employee.employeeNumber, row, 1);
-                model.setValueAt(employee.firstName, row, 2);
-                model.setValueAt(employee.lastName, row, 3);
-                row++;
-            }
+        for (EmployeeInfo employee : list) {
+            model.setValueAt(employee instanceof FTE ? "Full Time" : "Part Time", row, 0);
+            model.setValueAt(employee.employeeNumber, row, 1);
+            model.setValueAt(employee.firstName, row, 2);
+            model.setValueAt(employee.lastName, row, 3);
+            row++;
         }
     }//GEN-LAST:event_jSearchButtonActionPerformed
 
     private void jSearchTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSearchTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jSearchTextFieldActionPerformed
+
+    private void jTablePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTablePropertyChange
+        System.out.println(jTable.getSelectedRow());
+    }//GEN-LAST:event_jTablePropertyChange
 
     /**
      * @param args the command line arguments
@@ -258,13 +271,13 @@ public class Main_jFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jAddEmployeeButton;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JFileChooser jFileChooser;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton jLoadFileButton;
     private javax.swing.JButton jSaveFileButton;
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JButton jSearchButton;
+    private javax.swing.JComboBox<String> jSearchComboBox;
     private javax.swing.JTextField jSearchTextField;
     private javax.swing.JTable jTable;
     // End of variables declaration//GEN-END:variables

@@ -2,6 +2,10 @@ import java.util.*;
 
 public class MyHashTable {
     
+    public static final int EMPLOYEE_NUMBER_INDEX = 0;
+    public static final int FIRST_NAME_INDEX = 1;
+    public static final int LAST_NAME_INDEX = 2;
+
     public ArrayList<EmployeeInfo>[] buckets;
     public int size;
 
@@ -41,19 +45,30 @@ public class MyHashTable {
         }
         return null;
     }
-    
-    public ArrayList<EmployeeInfo> retrieveAll(String query){
+
+    public ArrayList<EmployeeInfo> retrieveAll(int type, String query){
+        Boolean condition;
         ArrayList<EmployeeInfo> list = new ArrayList();
         for (ArrayList<EmployeeInfo> bucket : this.buckets) {
             for (EmployeeInfo item : bucket) {
-                Boolean a = String.valueOf(item.employeeNumber).contains(query);
-                Boolean b = item.firstName.contains(query);
-                Boolean c = item.lastName.contains(query);
-                if ((a || b || c) && a){
-                   System.out.println("a"); 
+                switch (type){
+                    case EMPLOYEE_NUMBER_INDEX:
+                        condition = String.valueOf(item.employeeNumber).contains(query);
+                        break;
+                    case FIRST_NAME_INDEX:
+                        condition = item.firstName.contains(query);
+                        break;  
+                    case LAST_NAME_INDEX:
+                        condition = item.lastName.contains(query);
+                        break;
+                    default:
+                        condition = false;
+                }
+                if (condition){
+                    list.add(item);
                 }
             }
         }
-        return null;
+        return list;
     }
 }
