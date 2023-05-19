@@ -35,26 +35,31 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jMainPanel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jFTEPanel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jMainPanel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jPTERadioButton" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jFTERadioButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="jPTEPanel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jAddChangeButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="jRemoveButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="jResponseLabel" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jPTERadioButton" min="-2" max="-2" attributes="0"/>
-                          <Component id="jFTERadioButton" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
                   </Group>
-                  <Component id="jPTEPanel" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jAddButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                      <Component id="jRemoveButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                      <Component id="jResponseLabel" min="-2" max="-2" attributes="0"/>
+                      <Component id="jFTEPanel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="47" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -78,7 +83,7 @@
               <Component id="jPTEPanel" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jAddButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jAddChangeButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jRemoveButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jResponseLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -88,12 +93,12 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="jAddButton">
+    <Component class="javax.swing.JButton" name="jAddChangeButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Add"/>
+        <Property name="text" type="java.lang.String" value="A/C"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jAddButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jAddChangeButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jRemoveButton">
@@ -106,7 +111,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jResponseLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Employee added!"/>
+        <Property name="text" type="java.lang.String" value=" "/>
       </Properties>
     </Component>
     <Component class="javax.swing.JRadioButton" name="jFTERadioButton">
@@ -145,9 +150,9 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="jFirstNameTextField" alignment="1" max="32767" attributes="0"/>
-                      <Component id="jLastNameTextField" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jEmployeeNumberTextField" min="-2" pref="100" max="-2" attributes="0"/>
+                      <Component id="jEmployeeNumberTextField" pref="100" max="32767" attributes="0"/>
+                      <Component id="jFirstNameTextField" max="32767" attributes="0"/>
+                      <Component id="jLastNameTextField" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
@@ -163,13 +168,13 @@
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jFirstNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jFirstNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jFirstNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLastNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLastNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLastNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -193,25 +198,11 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jFirstNameTextField">
-          <Properties>
-            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[60, 20]"/>
-            </Property>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JLabel" name="jLastNameLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Last Name"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[69, 16]"/>
-            </Property>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="jLastNameTextField">
-          <Properties>
-            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[60, 20]"/>
             </Property>
           </Properties>
         </Component>
@@ -228,6 +219,10 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="javax.swing.text.NumberFormatter employeeNumberFormatter = new javax.swing.text.NumberFormatter(new java.text.DecimalFormat(&quot;#0&quot;)); &#xa;employeeNumberFormatter.setAllowsInvalid(false); &#xa;employeeNumberFormatter.setCommitsOnValidEdit(true);&#xa;employeeNumberFormatter.setOverwriteMode(false);&#xa;employeeNumberFormatter.setMinimum(0);&#xa;employeeNumberFormatter.setMaximum(999999999);"/>
           </AuxValues>
+        </Component>
+        <Component class="javax.swing.JFormattedTextField" name="jFirstNameTextField">
+        </Component>
+        <Component class="javax.swing.JFormattedTextField" name="jLastNameTextField">
         </Component>
       </SubComponents>
     </Container>

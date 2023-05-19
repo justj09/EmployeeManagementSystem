@@ -6,10 +6,15 @@ public class Main_jFrame extends javax.swing.JFrame {
 
     public MyHashTable employeeTable;
     public DefaultTableModel model;
+    public EmployeeInfo selectedEmployee;
+    public ArrayList<EmployeeInfo> filteredTable;
 
     public Main_jFrame() {
         initComponents();
         employeeTable = new MyHashTable(10);
+        selectedEmployee = null;
+        jEditButton.setEnabled(false);
+        jSearchButton.doClick();
     }
 
     @SuppressWarnings("unchecked")
@@ -17,15 +22,16 @@ public class Main_jFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jFileChooser = new javax.swing.JFileChooser();
-        jAddEmployeeButton = new javax.swing.JButton();
-        jSaveFileButton = new javax.swing.JButton();
-        jLoadFileButton = new javax.swing.JButton();
+        jAddButton = new javax.swing.JButton();
+        jSaveButton = new javax.swing.JButton();
+        jLoadButton = new javax.swing.JButton();
         jSearchButton = new javax.swing.JButton();
         jScrollPane = new javax.swing.JScrollPane();
         jTable = new javax.swing.JTable();
         jSearchComboBox = new javax.swing.JComboBox<>();
         jSearchTextField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jEditButton = new javax.swing.JButton();
 
         jFileChooser.setApproveButtonText("");
         jFileChooser.setApproveButtonToolTipText("");
@@ -33,25 +39,25 @@ public class Main_jFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jAddEmployeeButton.setText("Add new employee");
-        jAddEmployeeButton.addActionListener(new java.awt.event.ActionListener() {
+        jAddButton.setText("Add");
+        jAddButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jAddEmployeeButtonActionPerformed(evt);
+                jAddButtonActionPerformed(evt);
             }
         });
 
-        jSaveFileButton.setText("Save all employees to file");
-        jSaveFileButton.addActionListener(new java.awt.event.ActionListener() {
+        jSaveButton.setText("Save");
+        jSaveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jSaveFileButtonActionPerformed(evt);
+                jSaveButtonActionPerformed(evt);
             }
         });
 
-        jLoadFileButton.setText("Load all employees from file");
-        jLoadFileButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jLoadFileButton.addActionListener(new java.awt.event.ActionListener() {
+        jLoadButton.setText("Load");
+        jLoadButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLoadButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jLoadFileButtonActionPerformed(evt);
+                jLoadButtonActionPerformed(evt);
             }
         });
 
@@ -75,11 +81,10 @@ public class Main_jFrame extends javax.swing.JFrame {
         jTable.setAutoscrolls(false);
         jTable.setColumnSelectionAllowed(true);
         jTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTable.setRowSelectionAllowed(true);
         jTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-        jTable.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                jTablePropertyChange(evt);
+        jTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableMouseClicked(evt);
             }
         });
         jScrollPane.setViewportView(jTable);
@@ -91,9 +96,12 @@ public class Main_jFrame extends javax.swing.JFrame {
         jSearchComboBox.setToolTipText("");
 
         jSearchTextField.setToolTipText("");
-        jSearchTextField.addActionListener(new java.awt.event.ActionListener() {
+
+        jEditButton.setText("Edit");
+        jEditButton.setEnabled(false);
+        jEditButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jSearchTextFieldActionPerformed(evt);
+                jEditButtonActionPerformed(evt);
             }
         });
 
@@ -103,43 +111,51 @@ public class Main_jFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jAddEmployeeButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLoadFileButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jSaveFileButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jAddButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLoadButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSaveButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 165, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jSearchComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jSearchTextField)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jSearchButton))
-                        .addComponent(jScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(14, 14, 14))
+                .addGap(206, 206, 206)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addGap(194, 194, 194))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jEditButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
+                                .addComponent(jSearchComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jSearchTextField)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jSearchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(15, 15, 15))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLoadFileButton)
+                .addComponent(jLoadButton)
                 .addGap(6, 6, 6)
-                .addComponent(jSaveFileButton)
+                .addComponent(jSaveButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jAddEmployeeButton)
-                .addGap(22, 22, 22)
+                .addComponent(jAddButton)
+                .addGap(19, 19, 19)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jSearchComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(jEditButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSearchButton, javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jSearchButton)
                     .addComponent(jSearchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(15, 15, 15))
         );
 
         jSearchComboBox.getAccessibleContext().setAccessibleName("");
@@ -147,11 +163,11 @@ public class Main_jFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jAddEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAddEmployeeButtonActionPerformed
-        new AddNewEmployee_jFrame(employeeTable).setVisible(true);
-    }//GEN-LAST:event_jAddEmployeeButtonActionPerformed
+    private void jAddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAddButtonActionPerformed
+        new AddChangeEmployee_jFrame(employeeTable).setVisible(true);
+    }//GEN-LAST:event_jAddButtonActionPerformed
 
-    private void jSaveFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSaveFileButtonActionPerformed
+    private void jSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSaveButtonActionPerformed
         jFileChooser.setFileSelectionMode(jFileChooser.DIRECTORIES_ONLY);
         jFileChooser.showSaveDialog(this);
         File file = new File(jFileChooser.getSelectedFile().getAbsolutePath(), "HashTable.txt");
@@ -183,9 +199,9 @@ public class Main_jFrame extends javax.swing.JFrame {
             e.printStackTrace();
         }
 
-    }//GEN-LAST:event_jSaveFileButtonActionPerformed
+    }//GEN-LAST:event_jSaveButtonActionPerformed
 
-    private void jLoadFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLoadFileButtonActionPerformed
+    private void jLoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLoadButtonActionPerformed
         jFileChooser.setFileSelectionMode(jFileChooser.FILES_ONLY);
         jFileChooser.showOpenDialog(this);
         try {
@@ -205,16 +221,16 @@ public class Main_jFrame extends javax.swing.JFrame {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
-    }//GEN-LAST:event_jLoadFileButtonActionPerformed
+    }//GEN-LAST:event_jLoadButtonActionPerformed
 
     private void jSearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSearchButtonActionPerformed
-        ArrayList<EmployeeInfo> list = employeeTable.retrieveAll(jSearchComboBox.getSelectedIndex(), jSearchTextField.getText());
-        int num = list.size();
+        filteredTable = employeeTable.retrieveAll(jSearchComboBox.getSelectedIndex(), jSearchTextField.getText());
+        int num = filteredTable.size();
         int row = 0;
         model = new DefaultTableModel(new Object[] {"Status", "Emp Num", "First Name", "Last Name"}, num);
         jTable.setModel(model);
         jTable.setAutoCreateColumnsFromModel(true);
-        for (EmployeeInfo employee : list) {
+        for (EmployeeInfo employee : filteredTable) {
             model.setValueAt(employee instanceof FTE ? "Full Time" : "Part Time", row, 0);
             model.setValueAt(employee.employeeNumber, row, 1);
             model.setValueAt(employee.firstName, row, 2);
@@ -223,13 +239,18 @@ public class Main_jFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jSearchButtonActionPerformed
 
-    private void jSearchTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSearchTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jSearchTextFieldActionPerformed
+    private void jEditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEditButtonActionPerformed
+        new AddChangeEmployee_jFrame(employeeTable, selectedEmployee).setVisible(true);
+    }//GEN-LAST:event_jEditButtonActionPerformed
 
-    private void jTablePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTablePropertyChange
+    private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
+        if (jTable.getSelectedRow() != -1){
+            selectedEmployee = filteredTable.get(jTable.getSelectedRow());
+            jEditButton.setEnabled(true);
+        }
+        
         System.out.println(jTable.getSelectedRow());
-    }//GEN-LAST:event_jTablePropertyChange
+    }//GEN-LAST:event_jTableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -270,11 +291,12 @@ public class Main_jFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jAddEmployeeButton;
+    private javax.swing.JButton jAddButton;
+    private javax.swing.JButton jEditButton;
     private javax.swing.JFileChooser jFileChooser;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JButton jLoadFileButton;
-    private javax.swing.JButton jSaveFileButton;
+    private javax.swing.JButton jLoadButton;
+    private javax.swing.JButton jSaveButton;
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JButton jSearchButton;
     private javax.swing.JComboBox<String> jSearchComboBox;
