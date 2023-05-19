@@ -4,20 +4,20 @@ import java.util.*;
 import java.lang.Math.*;
 
 public class AddChangeEmployee_jFrame extends javax.swing.JFrame {
-    public MyHashTable employeeTable;  // This contains the ref value for theHT of MainJFrame.
+    public MyHashTable employeeTable;
+    public javax.swing.JButton jSearchButton;
     public javax.swing.JTextField[] FTEFieldArray;
     public javax.swing.JTextField[] PTEFieldArray;
     public Map<javax.swing.JTextField, String> textFieldType;
-    public Boolean isChangeState;
     public EmployeeInfo changeTarget;
     
-    public AddChangeEmployee_jFrame(MyHashTable employeeTable) {
+    public AddChangeEmployee_jFrame(MyHashTable employeeTable, javax.swing.JButton jSearchButton) {
         initComponents();
         this.employeeTable = employeeTable;
+        this.jSearchButton = jSearchButton;
         this.FTEFieldArray = new JTextField[]{jEmployeeNumberTextField, jFirstNameTextField, jLastNameTextField, jSalaryTextField};
         this.PTEFieldArray = new JTextField[]{jEmployeeNumberTextField, jFirstNameTextField, jLastNameTextField, jHourlyWageTextField, jHoursPerWeekTextField, jWeeksPerYearTextField};
         this.textFieldType = Map.of(jEmployeeNumberTextField, "0", jFirstNameTextField,"", jLastNameTextField, "", jSalaryTextField, "0", jHourlyWageTextField, "0", jHoursPerWeekTextField, "0", jWeeksPerYearTextField, "0");
-        this.isChangeState = false;
         clearText(FTEFieldArray);
         clearText(PTEFieldArray);
         jAddChangeButton.setText("Add");
@@ -26,10 +26,9 @@ public class AddChangeEmployee_jFrame extends javax.swing.JFrame {
         pack();
     }
     
-    public AddChangeEmployee_jFrame(MyHashTable employeeTable, EmployeeInfo e) {
-        this(employeeTable);
+    public AddChangeEmployee_jFrame(MyHashTable employeeTable, javax.swing.JButton jSearchButton, EmployeeInfo e) {
+        this(employeeTable, jSearchButton);
         changeTarget = e;
-        this.isChangeState = true;
         jAddChangeButton.setText("Change");
         jEmployeeNumberTextField.setValue(e.employeeNumber);
         jFirstNameTextField.setText(e.firstName);
@@ -88,6 +87,8 @@ public class AddChangeEmployee_jFrame extends javax.swing.JFrame {
         jEmployeeNumberTextField = new javax.swing.JFormattedTextField();
         jFirstNameTextField = new javax.swing.JFormattedTextField();
         jLastNameTextField = new javax.swing.JFormattedTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jDeductRateTextField = new javax.swing.JFormattedTextField();
         jPTEPanel = new javax.swing.JPanel();
         jHourlyWageLabel = new javax.swing.JLabel();
         jHoursPerWeekLabel = new javax.swing.JLabel();
@@ -159,27 +160,45 @@ public class AddChangeEmployee_jFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Deduct Rate");
+
+        javax.swing.text.NumberFormatter deductRateFormatter = new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0%"));
+        deductRateFormatter.setAllowsInvalid(false);
+        deductRateFormatter.setCommitsOnValidEdit(true);
+        deductRateFormatter.setOverwriteMode(false);
+        jDeductRateTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(deductRateFormatter));
+        jDeductRateTextField.setText("100%");
+        jDeductRateTextField.setToolTipText("");
+        jDeductRateTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPercentTextFieldKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jMainPanelLayout = new javax.swing.GroupLayout(jMainPanel);
         jMainPanel.setLayout(jMainPanelLayout);
         jMainPanelLayout.setHorizontalGroup(
             jMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jMainPanelLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
-                .addGroup(jMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jFirstNameLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                    .addComponent(jLastNameLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jEmployeeNumberLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                    .addGroup(jMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jFirstNameLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                        .addComponent(jLastNameLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jEmployeeNumberLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jEmployeeNumberTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                    .addComponent(jFirstNameTextField)
-                    .addComponent(jLastNameTextField))
+                .addGroup(jMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jEmployeeNumberTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                        .addComponent(jFirstNameTextField)
+                        .addComponent(jLastNameTextField))
+                    .addComponent(jDeductRateTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jMainPanelLayout.setVerticalGroup(
             jMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jMainPanelLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jMainPanelLayout.createSequentialGroup()
                 .addGroup(jMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jEmployeeNumberLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jEmployeeNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -190,7 +209,12 @@ public class AddChangeEmployee_jFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLastNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jDeductRateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jHourlyWageLabel.setText("Hourly Wage");
@@ -380,7 +404,7 @@ public class AddChangeEmployee_jFrame extends javax.swing.JFrame {
         clearColor(PTEFieldArray);
         ArrayList<javax.swing.JFormattedTextField> list = new ArrayList();
         if (employeeTable.retrieve((int)jEmployeeNumberTextField.getValue()) != null){
-            if (!isChangeState){
+            if (!jAddChangeButton.getText().equals("Change")){
                 list.add(jEmployeeNumberTextField);
             }
             else if ((int)jEmployeeNumberTextField.getValue() != changeTarget.employeeNumber){
@@ -398,21 +422,22 @@ public class AddChangeEmployee_jFrame extends javax.swing.JFrame {
             if (jFTERadioButton.isSelected()){
                 FTE item = new FTE(getField(FTEFieldArray));
                 employeeTable.add(item);
-                jResponseLabel.setText("Employee added"); 
             }
             else {
                 PTE item = new PTE(getField(PTEFieldArray));
                 employeeTable.add(item);  
-                jResponseLabel.setText("Employee added"); 
             }
  
-            if (!isChangeState){
+            if (!jAddChangeButton.getText().equals("Change")){
+                jResponseLabel.setText("Employee Added"); 
                 clearText(FTEFieldArray);
                 clearText(PTEFieldArray);
             }
             else{
+                jResponseLabel.setText("Employee Updated"); 
                 employeeTable.remove(changeTarget.employeeNumber);
             }
+            jSearchButton.doClick();
         }
         else {
             for (javax.swing.JFormattedTextField i : list){
@@ -470,6 +495,23 @@ public class AddChangeEmployee_jFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jIntegerTextFieldKeyPressed
 
+    private void jPercentTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPercentTextFieldKeyPressed
+        javax.swing.JTextField field = (javax.swing.JTextField)evt.getSource();
+        System.out.println(field.getText());
+        if (field.getText().length() == 2) {
+            if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_BACK_SPACE && field.getCaretPosition() == 1 && !field.getText().equals("0")){
+                evt.consume();
+                field.setText("0%");
+            }
+            else if (field.getText().equals("0%") && "0123456789".contains(Character.toString(evt.getKeyChar()))){
+                field.setText(Character.toString(evt.getKeyChar()) + "%");
+            }          
+        }
+        if (field.getCaretPosition() == field.getText().length() - 1 && "0123456789".contains(Character.toString(evt.getKeyChar()))){
+            field.setText(Character.toString(evt.getKeyChar()).replace("%", evt.getKeyChar() + "%"));
+        }
+    }//GEN-LAST:event_jPercentTextFieldKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -477,6 +519,7 @@ public class AddChangeEmployee_jFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jAddChangeButton;
+    private javax.swing.JFormattedTextField jDeductRateTextField;
     private javax.swing.JLabel jEmployeeNumberLabel;
     private javax.swing.JFormattedTextField jEmployeeNumberTextField;
     private javax.swing.JPanel jFTEPanel;
@@ -487,6 +530,7 @@ public class AddChangeEmployee_jFrame extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField jHourlyWageTextField;
     private javax.swing.JLabel jHoursPerWeekLabel;
     private javax.swing.JFormattedTextField jHoursPerWeekTextField;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLastNameLabel;
     private javax.swing.JFormattedTextField jLastNameTextField;
     private javax.swing.JPanel jMainPanel;

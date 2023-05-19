@@ -9,6 +9,11 @@
         <Property name="dialogTitle" type="java.lang.String" value=""/>
       </Properties>
     </Component>
+    <Component class="javax.swing.JOptionPane" name="jOptionPane">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+      </Properties>
+    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
@@ -42,29 +47,22 @@
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="206" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="194" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="jEditButton" min="-2" pref="70" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jDeleteButton" min="-2" pref="70" max="-2" attributes="0"/>
+                      <EmptySpace pref="38" max="32767" attributes="0"/>
+                      <Component id="jSearchComboBox" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="jScrollPane" alignment="1" pref="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="jEditButton" min="-2" pref="70" max="-2" attributes="0"/>
-                              <EmptySpace pref="120" max="32767" attributes="0"/>
-                              <Component id="jSearchComboBox" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="jScrollPane" alignment="1" pref="0" max="32767" attributes="0"/>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="jSearchTextField" max="32767" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jSearchButton" min="-2" pref="70" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                      <Component id="jSearchTextField" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jSearchButton" min="-2" pref="70" max="-2" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -76,12 +74,11 @@
               <Component id="jSaveButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jAddButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jSearchComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jEditButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jDeleteButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -186,8 +183,6 @@
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
-    </Component>
     <Component class="javax.swing.JButton" name="jEditButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Edit"/>
@@ -195,6 +190,15 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jEditButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jDeleteButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Delete"/>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jDeleteButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

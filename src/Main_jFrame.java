@@ -14,6 +14,7 @@ public class Main_jFrame extends javax.swing.JFrame {
         employeeTable = new MyHashTable(10);
         selectedEmployee = null;
         jEditButton.setEnabled(false);
+        jDeleteButton.setEnabled(false);
         jSearchButton.doClick();
     }
 
@@ -22,6 +23,7 @@ public class Main_jFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jFileChooser = new javax.swing.JFileChooser();
+        jOptionPane = new javax.swing.JOptionPane();
         jAddButton = new javax.swing.JButton();
         jSaveButton = new javax.swing.JButton();
         jLoadButton = new javax.swing.JButton();
@@ -30,12 +32,14 @@ public class Main_jFrame extends javax.swing.JFrame {
         jTable = new javax.swing.JTable();
         jSearchComboBox = new javax.swing.JComboBox<>();
         jSearchTextField = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
         jEditButton = new javax.swing.JButton();
+        jDeleteButton = new javax.swing.JButton();
 
         jFileChooser.setApproveButtonText("");
         jFileChooser.setApproveButtonToolTipText("");
         jFileChooser.setDialogTitle("");
+
+        jOptionPane.setToolTipText("");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -105,6 +109,14 @@ public class Main_jFrame extends javax.swing.JFrame {
             }
         });
 
+        jDeleteButton.setText("Delete");
+        jDeleteButton.setEnabled(false);
+        jDeleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jDeleteButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -117,23 +129,19 @@ public class Main_jFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(206, 206, 206)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addGap(194, 194, 194))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jEditButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
-                                .addComponent(jSearchComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jSearchTextField)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jSearchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(15, 15, 15))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jEditButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jDeleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                        .addComponent(jSearchComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jSearchTextField)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jSearchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(15, 15, 15))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,12 +151,11 @@ public class Main_jFrame extends javax.swing.JFrame {
                 .addComponent(jSaveButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jAddButton)
-                .addGap(19, 19, 19)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jSearchComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jEditButton))
+                    .addComponent(jEditButton)
+                    .addComponent(jDeleteButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jSearchButton)
@@ -164,7 +171,7 @@ public class Main_jFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jAddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAddButtonActionPerformed
-        new AddChangeEmployee_jFrame(employeeTable).setVisible(true);
+        new AddChangeEmployee_jFrame(employeeTable, jSearchButton).setVisible(true);
     }//GEN-LAST:event_jAddButtonActionPerformed
 
     private void jSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSaveButtonActionPerformed
@@ -216,6 +223,7 @@ public class Main_jFrame extends javax.swing.JFrame {
                     employeeTable.add(new PTE(new String[]{s.next(), s.next(), s.next(), s.next(), s.next(), s.next()}));
                 }
             }
+            jSearchButton.doClick();
         }
         catch (FileNotFoundException e){
             System.out.println("An error occurred.");
@@ -240,17 +248,24 @@ public class Main_jFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jSearchButtonActionPerformed
 
     private void jEditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEditButtonActionPerformed
-        new AddChangeEmployee_jFrame(employeeTable, selectedEmployee).setVisible(true);
+        new AddChangeEmployee_jFrame(employeeTable, jSearchButton, selectedEmployee).setVisible(true);
+        jSearchButton.doClick();
     }//GEN-LAST:event_jEditButtonActionPerformed
 
     private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
         if (jTable.getSelectedRow() != -1){
             selectedEmployee = filteredTable.get(jTable.getSelectedRow());
             jEditButton.setEnabled(true);
+            jDeleteButton.setEnabled(true);
         }
-        
-        System.out.println(jTable.getSelectedRow());
     }//GEN-LAST:event_jTableMouseClicked
+
+    private void jDeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDeleteButtonActionPerformed
+        if (jOptionPane.showConfirmDialog(this, "Are you sure you want to delete\nemployee #" + Integer.toString(selectedEmployee.employeeNumber) + ": " + selectedEmployee.firstName + " " + selectedEmployee.lastName + "?", "Deletion Confirmation",javax.swing.JOptionPane.YES_NO_OPTION,javax.swing.JOptionPane.WARNING_MESSAGE) == 0){
+            employeeTable.remove(selectedEmployee.employeeNumber);
+            jSearchButton.doClick();
+        }
+    }//GEN-LAST:event_jDeleteButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -292,10 +307,11 @@ public class Main_jFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jAddButton;
+    private javax.swing.JButton jDeleteButton;
     private javax.swing.JButton jEditButton;
     private javax.swing.JFileChooser jFileChooser;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton jLoadButton;
+    private javax.swing.JOptionPane jOptionPane;
     private javax.swing.JButton jSaveButton;
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JButton jSearchButton;
