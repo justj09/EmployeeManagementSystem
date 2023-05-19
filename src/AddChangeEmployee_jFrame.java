@@ -166,6 +166,8 @@ public class AddChangeEmployee_jFrame extends javax.swing.JFrame {
         deductRateFormatter.setAllowsInvalid(false);
         deductRateFormatter.setCommitsOnValidEdit(true);
         deductRateFormatter.setOverwriteMode(false);
+        deductRateFormatter.setMinimum(0.0);
+        deductRateFormatter.setMaximum(1.0);
         jDeductRateTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(deductRateFormatter));
         jDeductRateTextField.setText("100%");
         jDeductRateTextField.setToolTipText("");
@@ -183,10 +185,9 @@ public class AddChangeEmployee_jFrame extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addGroup(jMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                    .addGroup(jMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jFirstNameLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                        .addComponent(jLastNameLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jEmployeeNumberLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jFirstNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                    .addComponent(jLastNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jEmployeeNumberLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -497,18 +498,15 @@ public class AddChangeEmployee_jFrame extends javax.swing.JFrame {
 
     private void jPercentTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPercentTextFieldKeyPressed
         javax.swing.JTextField field = (javax.swing.JTextField)evt.getSource();
-        System.out.println(field.getText());
         if (field.getText().length() == 2) {
             if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_BACK_SPACE && field.getCaretPosition() == 1 && !field.getText().equals("0")){
                 evt.consume();
                 field.setText("0%");
-            }
-            else if (field.getText().equals("0%") && "0123456789".contains(Character.toString(evt.getKeyChar()))){
-                field.setText(Character.toString(evt.getKeyChar()) + "%");
-            }          
+            }   
         }
         if (field.getCaretPosition() == field.getText().length() - 1 && "0123456789".contains(Character.toString(evt.getKeyChar()))){
-            field.setText(Character.toString(evt.getKeyChar()).replace("%", evt.getKeyChar() + "%"));
+            System.out.println(field.getText().replace("%", Character.toString(evt.getKeyChar()) + "%"));
+            field.setText(field.getText().replace("%", evt.getKeyChar() + "%"));
         }
     }//GEN-LAST:event_jPercentTextFieldKeyPressed
 
