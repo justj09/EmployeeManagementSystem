@@ -1,7 +1,6 @@
 import java.awt.Color;
 import javax.swing.*;
 import java.util.*;
-import java.lang.Math.*;
 
 public class AddChangeEmployee_jFrame extends javax.swing.JFrame {
     public MyHashTable employeeTable;
@@ -9,7 +8,7 @@ public class AddChangeEmployee_jFrame extends javax.swing.JFrame {
     public javax.swing.JFormattedTextField[] FTEFieldArray;
     public javax.swing.JFormattedTextField[] PTEFieldArray;
     public Map<javax.swing.JFormattedTextField, String> textFieldType;
-    public EmployeeInfo changeTarget;
+    public EmployeeInfo selectedEmployee;
     
     public AddChangeEmployee_jFrame(MyHashTable employeeTable, javax.swing.JButton jSearchButton) {
         initComponents();
@@ -26,23 +25,24 @@ public class AddChangeEmployee_jFrame extends javax.swing.JFrame {
         pack();
     }
     
-    public AddChangeEmployee_jFrame(MyHashTable employeeTable, javax.swing.JButton jSearchButton, EmployeeInfo e) {
+    public AddChangeEmployee_jFrame(MyHashTable employeeTable, javax.swing.JButton jSearchButton, EmployeeInfo selectedEmployee) {
         this(employeeTable, jSearchButton);
-        changeTarget = e;
+        this.selectedEmployee = selectedEmployee;
+        this.setTitle("Change Employee #" + Integer.toString(selectedEmployee.employeeNumber));
         jAddChangeButton.setText("Change");
-        jEmployeeNumberTextField.setValue(e.employeeNumber);
-        jFirstNameTextField.setText(e.firstName);
-        jLastNameTextField.setText(e.lastName);
-        jDeductRateTextField.setValue(e.deductRate);
-        if (e instanceof FTE){
+        jEmployeeNumberTextField.setValue(selectedEmployee.employeeNumber);
+        jFirstNameTextField.setText(selectedEmployee.firstName);
+        jLastNameTextField.setText(selectedEmployee.lastName);
+        jDeductRateTextField.setValue(selectedEmployee.deductRate);
+        if (selectedEmployee instanceof FTE){
             jFTERadioButton.doClick();
-            jSalaryTextField.setValue(((FTE)e).yearlySalary);
+            jSalaryTextField.setValue(((FTE)selectedEmployee).yearlySalary);
         }
         else {
             jPTERadioButton.doClick();
-            jHourlyWageTextField.setValue(((PTE)e).hourlyWage);
-            jHoursPerWeekTextField.setValue(((PTE)e).hoursPerWeek);
-            jWeeksPerYearTextField.setValue(((PTE)e).weeksPerYear);
+            jHourlyWageTextField.setValue(((PTE)selectedEmployee).hourlyWage);
+            jHoursPerWeekTextField.setValue(((PTE)selectedEmployee).hoursPerWeek);
+            jWeeksPerYearTextField.setValue(((PTE)selectedEmployee).weeksPerYear);
         }
     }
     
@@ -62,9 +62,11 @@ public class AddChangeEmployee_jFrame extends javax.swing.JFrame {
         Object[] output = new Object[array.length];
         for (int i = 0; i < array.length; i++){
             if (array[i].getValue() == null){
+                System.out.println(array[i].getText() + " a");
                 output[i] = (Object)array[i].getText();
             }
             else {
+                System.out.println(array[i].getValue());
                 output[i] = (Object)array[i].getValue();
             }
         }
@@ -107,6 +109,7 @@ public class AddChangeEmployee_jFrame extends javax.swing.JFrame {
         jSalaryLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Add Employee");
         setMinimumSize(new java.awt.Dimension(0, 260));
         setResizable(false);
 
@@ -414,7 +417,7 @@ public class AddChangeEmployee_jFrame extends javax.swing.JFrame {
             if (jAddChangeButton.getText().equals("Add")){
                 list.add(jEmployeeNumberTextField);
             }
-            else if ((int)jEmployeeNumberTextField.getValue() != changeTarget.employeeNumber){
+            else if ((int)jEmployeeNumberTextField.getValue() != selectedEmployee.employeeNumber){
                 list.add(jEmployeeNumberTextField);
             }
         }
@@ -433,20 +436,20 @@ public class AddChangeEmployee_jFrame extends javax.swing.JFrame {
                 PTE item = new PTE(getField(PTEFieldArray));
                 employeeTable.add(item);  
             }
-            System.out.println("c");
             if (jAddChangeButton.getText().equals("Add")){
-                jResponseLabel.setText("Employee Added"); 
+                selectedEmployee = null;
+                jResponseLabel.setText("Employee Added");
                 clearText(FTEFieldArray);
                 clearText(PTEFieldArray);
             }
             else{
                 jResponseLabel.setText("Employee Updated"); 
-                employeeTable.remove(changeTarget.employeeNumber);
+                employeeTable.remove(selectedEmployee.employeeNumber);
+                selectedEmployee = employeeTable.retrieve((int)jEmployeeNumberTextField.getValue());
             }
             jSearchButton.doClick();
         }
         else {
-            System.out.println("d");
             for (javax.swing.JFormattedTextField i : list){
                 i.setBackground(new Color(255, 150, 150));
                 jResponseLabel.setText("Invalid Field");
@@ -504,13 +507,13 @@ public class AddChangeEmployee_jFrame extends javax.swing.JFrame {
 
     private void jPercentTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPercentTextFieldKeyPressed
         javax.swing.JFormattedTextField field = (javax.swing.JFormattedTextField)evt.getSource();
-        if (field.getText().length() == 2 && evt.getKeyCode() == java.awt.event.KeyEvent.VK_BACK_SPACE && field.getCaretPosition() == 1 && !field.getText().equals("0")) {
+        if (field.getText().length() == 2 && evt.getKeyCode() == java.awt.event.KeyEvent.VK_BACK_SPACE && field.getCaretPosition() == 1 && !field.getText().equals("0%")) {
             evt.consume();
             field.setText("0%");  
         }
-        if (field.getCaretPosition() == field.getText().length() - 1 && "0123456789".contains(Character.toString(evt.getKeyChar()))){
+        else if ((field.getCaretPosition() == field.getText().length() - 1 || field.getText().equals("0%")) && "0123456789".contains(Character.toString(evt.getKeyChar()))){
             field.setText(field.getText().replace("%", evt.getKeyChar() + "%"));
-        }
+        } 
     }//GEN-LAST:event_jPercentTextFieldKeyPressed
 
     /**

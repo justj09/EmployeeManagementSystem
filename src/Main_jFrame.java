@@ -13,8 +13,6 @@ public class Main_jFrame extends javax.swing.JFrame {
         initComponents();
         employeeTable = new MyHashTable(10);
         selectedEmployee = null;
-        jEditButton.setEnabled(false);
-        jDeleteButton.setEnabled(false);
         jSearchButton.doClick();
     }
 
@@ -34,14 +32,16 @@ public class Main_jFrame extends javax.swing.JFrame {
         jSearchTextField = new javax.swing.JTextField();
         jEditButton = new javax.swing.JButton();
         jDeleteButton = new javax.swing.JButton();
+        jSelectedEmployeeLabel = new java.awt.Label();
 
-        jFileChooser.setApproveButtonText("");
+        jFileChooser.setApproveButtonText("Open");
         jFileChooser.setApproveButtonToolTipText("");
         jFileChooser.setDialogTitle("");
 
         jOptionPane.setToolTipText("");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Main Menu");
 
         jAddButton.setText("Add");
         jAddButton.addActionListener(new java.awt.event.ActionListener() {
@@ -95,8 +95,8 @@ public class Main_jFrame extends javax.swing.JFrame {
         jTable.getAccessibleContext().setAccessibleName("");
         jTable.getAccessibleContext().setAccessibleDescription("");
 
-        jSearchComboBox.setMaximumRowCount(3);
-        jSearchComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Employee Number", "First Name", "Last Name" }));
+        jSearchComboBox.setMaximumRowCount(4);
+        jSearchComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Employee Number", "First Name", "Last Name", "Deduct Rate" }));
         jSearchComboBox.setToolTipText("");
 
         jSearchTextField.setToolTipText("");
@@ -122,41 +122,42 @@ public class Main_jFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jAddButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLoadButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jSaveButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(129, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jEditButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jDeleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jSearchComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jSearchTextField)))
+                        .addComponent(jAddButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jSaveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSearchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(15, 15, 15))
+                        .addComponent(jLoadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jSearchComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSearchTextField)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSearchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jEditButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jDeleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jSelectedEmployeeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(10, 10, 10))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLoadButton)
-                .addGap(6, 6, 6)
-                .addComponent(jSaveButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jAddButton)
-                .addGap(25, 25, 25)
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jAddButton)
+                    .addComponent(jSaveButton)
+                    .addComponent(jLoadButton))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jDeleteButton)
-                    .addComponent(jEditButton))
+                    .addComponent(jEditButton)
+                    .addComponent(jSelectedEmployeeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jSearchButton)
@@ -164,7 +165,7 @@ public class Main_jFrame extends javax.swing.JFrame {
                     .addComponent(jSearchComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         jSearchComboBox.getAccessibleContext().setAccessibleName("");
@@ -177,23 +178,23 @@ public class Main_jFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jAddButtonActionPerformed
 
     private void jSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSaveButtonActionPerformed
-        jFileChooser.setFileSelectionMode(jFileChooser.DIRECTORIES_ONLY);
-        jFileChooser.showSaveDialog(this);
-        File file = new File(jFileChooser.getSelectedFile().getAbsolutePath(), "HashTable.txt");
-        for (int i = 1; file.exists(); i++){
-            file = new File(jFileChooser.getSelectedFile().getAbsolutePath(), "HashTable(" + Integer.toString(i) + ").txt");
-        }
         try {
+            jFileChooser.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
+            jFileChooser.showSaveDialog(this);
+            File file = new File(jFileChooser.getSelectedFile().getAbsolutePath(), "HashTable.txt");
+            for (int i = 1; file.exists(); i++){
+                file = new File(jFileChooser.getSelectedFile().getAbsolutePath(), "HashTable(" + Integer.toString(i) + ").txt");
+            }
             String formatedText = "";
             for (ArrayList<EmployeeInfo> currentBucket : employeeTable.buckets) {
                 for (EmployeeInfo currentItem : currentBucket){
                     if (currentItem instanceof FTE){
                         FTE theFTE = (FTE) currentItem;
-                        formatedText += "█" + String.join("█", "F", Integer.toString(theFTE.employeeNumber), theFTE.firstName, theFTE.lastName, Double.toString(theFTE.yearlySalary));
+                        formatedText += "█" + String.join("█", "F", Integer.toString(theFTE.employeeNumber), theFTE.firstName, theFTE.lastName, Double.toString(theFTE.deductRate), Double.toString(theFTE.yearlySalary));
                     }
                     else {
                         PTE thePTE = (PTE) currentItem;
-                        formatedText += "█" + String.join("█", "P", Integer.toString(thePTE.employeeNumber), thePTE.firstName, thePTE.lastName, Double.toString(thePTE.hourlyWage), Double.toString(thePTE.hoursPerWeek), Double.toString(thePTE.weeksPerYear));
+                        formatedText += "█" + String.join("█", "P", Integer.toString(thePTE.employeeNumber), thePTE.firstName, thePTE.lastName, Double.toString(thePTE.deductRate), Double.toString(thePTE.hourlyWage), Integer.toString(thePTE.hoursPerWeek), Integer.toString(thePTE.weeksPerYear));
                     }
                 }
             }
@@ -203,7 +204,7 @@ public class Main_jFrame extends javax.swing.JFrame {
             System.out.println("Successfully wrote to the file.");
         }
 
-        catch (IOException e) {
+        catch (Exception e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
@@ -211,33 +212,36 @@ public class Main_jFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jSaveButtonActionPerformed
 
     private void jLoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLoadButtonActionPerformed
-        jFileChooser.setFileSelectionMode(jFileChooser.FILES_ONLY);
-        jFileChooser.showOpenDialog(this);
         try {
+            jFileChooser.setFileSelectionMode(javax.swing.JFileChooser.FILES_ONLY);
+            jFileChooser.showOpenDialog(this);
             Scanner s = new Scanner(jFileChooser.getSelectedFile());
             s.useDelimiter("█");
             employeeTable = new MyHashTable(10);    
             while (s.hasNext()){
                 if (s.next().equals("F")){
-                    employeeTable.add(new FTE(new String[]{s.next(), s.next(), s.next(), s.next()}));
+                    employeeTable.add(new FTE(new Object[]{s.nextInt(), s.next(), s.next(), s.nextDouble(), s.nextDouble()}));
                 }
                 else {
-                    employeeTable.add(new PTE(new String[]{s.next(), s.next(), s.next(), s.next(), s.next(), s.next()}));
+                    employeeTable.add(new PTE(new Object[]{s.nextInt(), s.next(), s.next(), s.nextDouble(), s.nextDouble(), s.nextInt(), s.nextInt(),}));
                 }
             }
             jSearchButton.doClick();
         }
-        catch (FileNotFoundException e){
+        catch (Exception e){
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
     }//GEN-LAST:event_jLoadButtonActionPerformed
 
     private void jSearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSearchButtonActionPerformed
+        jEditButton.setEnabled(false);
+        jDeleteButton.setEnabled(false);
+        jSelectedEmployeeLabel.setText("");
         filteredTable = employeeTable.retrieveAll(jSearchComboBox.getSelectedIndex(), jSearchTextField.getText());
         int num = filteredTable.size();
         int row = 0;
-        model = new DefaultTableModel(new Object[] {"Status", "Number", "First Name", "Last Name", "Deduct Rate"}, num);
+        model = new DefaultTableModel(new Object[] {"Status", "Number", "First Name", "Last Name", "Deduct Rate", "Income"}, num);
         jTable.setModel(model);
         jTable.setAutoCreateColumnsFromModel(true);
         for (EmployeeInfo employee : filteredTable) {
@@ -245,6 +249,8 @@ public class Main_jFrame extends javax.swing.JFrame {
             model.setValueAt(employee.employeeNumber, row, 1);
             model.setValueAt(employee.firstName, row, 2);
             model.setValueAt(employee.lastName, row, 3);
+            model.setValueAt(Integer.toString((int)(employee.deductRate *100)) + "%", row, 4);
+            model.setValueAt(employee instanceof FTE ? "$" + String.valueOf(((FTE)employee).calcNetAnnualIncome()) : "$" + String.valueOf(((PTE)employee).calcNetAnnualIncome()), row, 5);
             row++;
         }
     }//GEN-LAST:event_jSearchButtonActionPerformed
@@ -259,6 +265,7 @@ public class Main_jFrame extends javax.swing.JFrame {
             selectedEmployee = filteredTable.get(jTable.getSelectedRow());
             jEditButton.setEnabled(true);
             jDeleteButton.setEnabled(true);
+            jSelectedEmployeeLabel.setText("Selected Employee: #" + Integer.toString(selectedEmployee.employeeNumber));
         }
     }//GEN-LAST:event_jTableMouseClicked
 
@@ -308,17 +315,18 @@ public class Main_jFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jAddButton;
-    private javax.swing.JButton jDeleteButton;
-    private javax.swing.JButton jEditButton;
-    private javax.swing.JFileChooser jFileChooser;
-    private javax.swing.JButton jLoadButton;
-    private javax.swing.JOptionPane jOptionPane;
-    private javax.swing.JButton jSaveButton;
-    private javax.swing.JScrollPane jScrollPane;
-    private javax.swing.JButton jSearchButton;
+    javax.swing.JButton jAddButton;
+    javax.swing.JButton jDeleteButton;
+    javax.swing.JButton jEditButton;
+    javax.swing.JFileChooser jFileChooser;
+    javax.swing.JButton jLoadButton;
+    javax.swing.JOptionPane jOptionPane;
+    javax.swing.JButton jSaveButton;
+    javax.swing.JScrollPane jScrollPane;
+    javax.swing.JButton jSearchButton;
     private javax.swing.JComboBox<String> jSearchComboBox;
-    private javax.swing.JTextField jSearchTextField;
-    private javax.swing.JTable jTable;
+    javax.swing.JTextField jSearchTextField;
+    java.awt.Label jSelectedEmployeeLabel;
+    javax.swing.JTable jTable;
     // End of variables declaration//GEN-END:variables
 }

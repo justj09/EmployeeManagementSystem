@@ -5,6 +5,7 @@ public class MyHashTable {
     public static final int EMPLOYEE_NUMBER_INDEX = 0;
     public static final int FIRST_NAME_INDEX = 1;
     public static final int LAST_NAME_INDEX = 2;
+    public static final int DEDUCT_RATE_INDEX = 3;
 
     public ArrayList<EmployeeInfo>[] buckets;
     public int size;
@@ -51,18 +52,29 @@ public class MyHashTable {
         ArrayList<EmployeeInfo> list = new ArrayList();
         for (ArrayList<EmployeeInfo> bucket : this.buckets) {
             for (EmployeeInfo item : bucket) {
-                switch (type){
-                    case EMPLOYEE_NUMBER_INDEX:
-                        condition = String.valueOf(item.employeeNumber).contains(query);
-                        break;
-                    case FIRST_NAME_INDEX:
-                        condition = item.firstName.contains(query);
-                        break;  
-                    case LAST_NAME_INDEX:
-                        condition = item.lastName.contains(query);
-                        break;
-                    default:
-                        condition = false;
+                try {
+                    switch (type){
+                        case EMPLOYEE_NUMBER_INDEX:
+                            condition = String.valueOf(item.employeeNumber).contains(query);
+                            break;
+                        case FIRST_NAME_INDEX:
+                            condition = item.firstName.contains(query);
+                            break;  
+                        case LAST_NAME_INDEX:
+                            condition = item.lastName.contains(query);
+                            break;
+                        case DEDUCT_RATE_INDEX:
+                            if (query.endsWith("%")){
+                                query = query.substring(0, query.length() - 1);
+                            }
+                            condition = String.valueOf(item.deductRate).contains(query);
+                            break;
+                        default:
+                            condition = false;
+                    }
+                }
+                catch (Exception e) {
+                    condition = false;
                 }
                 if (condition){
                     list.add(item);

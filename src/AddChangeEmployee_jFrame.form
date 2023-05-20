@@ -7,6 +7,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
+    <Property name="title" type="java.lang.String" value="Add Employee"/>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[0, 260]"/>
     </Property>
@@ -250,7 +251,7 @@
             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jPercentTextFieldKeyPressed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="javax.swing.text.NumberFormatter deductRateFormatter = new javax.swing.text.NumberFormatter(new java.text.DecimalFormat(&quot;#0%&quot;)); &#xa;deductRateFormatter.setAllowsInvalid(false); &#xa;deductRateFormatter.setCommitsOnValidEdit(true);&#xa;deductRateFormatter.setOverwriteMode(false);&#xa;deductRateFormatter.setMinimum(0.0);&#xa;deductRateFormatter.setMaximum(1.0);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="javax.swing.text.NumberFormatter deductRateFormatter = new javax.swing.text.NumberFormatter(new java.text.DecimalFormat(&quot;#0%&quot;));  &#xa;deductRateFormatter.setAllowsInvalid(false); &#xa;deductRateFormatter.setCommitsOnValidEdit(true);&#xa;deductRateFormatter.setOverwriteMode(false);&#xa;deductRateFormatter.setMinimum(0.0);&#xa;deductRateFormatter.setMaximum(1.0);"/>
           </AuxValues>
         </Component>
       </SubComponents>
