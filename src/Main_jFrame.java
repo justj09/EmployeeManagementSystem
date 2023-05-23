@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.*;
 import javax.swing.table.DefaultTableModel;
+import com.formdev.flatlaf.*;
 
 public class Main_jFrame extends javax.swing.JFrame {
 
@@ -72,6 +73,8 @@ public class Main_jFrame extends javax.swing.JFrame {
             }
         });
 
+        jScrollPane.setHorizontalScrollBar(null);
+
         jTable.setAutoCreateColumnsFromModel(false);
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -141,8 +144,8 @@ public class Main_jFrame extends javax.swing.JFrame {
                         .addComponent(jEditButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jDeleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jSelectedEmployeeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSelectedEmployeeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(10, 10, 10))
         );
         layout.setVerticalGroup(
@@ -154,10 +157,11 @@ public class Main_jFrame extends javax.swing.JFrame {
                     .addComponent(jSaveButton)
                     .addComponent(jLoadButton))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jDeleteButton)
-                    .addComponent(jEditButton)
-                    .addComponent(jSelectedEmployeeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSelectedEmployeeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jDeleteButton)
+                        .addComponent(jEditButton)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jSearchButton)
@@ -286,13 +290,7 @@ public class Main_jFrame extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                System.out.println(info.getName());
-                if ("Windows".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
+            javax.swing.UIManager.setLookAndFeel("com.formdev.flatlaf.FlatLightLaf");
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(Main_jFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
@@ -324,7 +322,7 @@ public class Main_jFrame extends javax.swing.JFrame {
     javax.swing.JButton jSaveButton;
     javax.swing.JScrollPane jScrollPane;
     javax.swing.JButton jSearchButton;
-    private javax.swing.JComboBox<String> jSearchComboBox;
+    javax.swing.JComboBox<String> jSearchComboBox;
     javax.swing.JTextField jSearchTextField;
     java.awt.Label jSelectedEmployeeLabel;
     javax.swing.JTable jTable;
