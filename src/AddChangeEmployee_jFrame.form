@@ -32,33 +32,38 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jMainPanel" max="32767" attributes="0"/>
-                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jPTERadioButton" min="-2" max="-2" attributes="0"/>
-                          <Component id="jFTERadioButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jAddChangeButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="jRemoveButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="jResponseLabel" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="jMainPanel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jPTERadioButton" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jFTERadioButton" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jPTEPanel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
+                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jAddChangeButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                      <Component id="jRemoveButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                      <Component id="jResponseLabel" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jPTEPanel" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jFTEPanel" alignment="0" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="92" pref="92" max="-2" attributes="0"/>
+                      <Component id="jFTEPanel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -258,17 +263,18 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="jWeeksPerYearLabel" max="32767" attributes="0"/>
                       <Component id="jHoursPerWeekLabel" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jWeeksPerYearLabel" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jHourlyWageLabel" min="-2" max="-2" attributes="0"/>
+                      <Component id="jHourlyWageLabel" alignment="0" pref="103" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jHourlyWageTextField" max="32767" attributes="0"/>
-                      <Component id="jHoursPerWeekTextField" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                      <Component id="jWeeksPerYearTextField" alignment="0" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jHourlyWageTextField" min="-2" pref="100" max="-2" attributes="0"/>
+                      <Component id="jHoursPerWeekTextField" min="-2" pref="100" max="-2" attributes="0"/>
+                      <Component id="jWeeksPerYearTextField" min="-2" pref="100" max="-2" attributes="0"/>
                   </Group>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -276,9 +282,9 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jHourlyWageTextField" max="-2" attributes="0"/>
-                      <Component id="jHourlyWageLabel" min="-2" pref="22" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jHourlyWageLabel" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                      <Component id="jHourlyWageTextField" alignment="3" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -286,9 +292,9 @@
                       <Component id="jHoursPerWeekTextField" alignment="3" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jWeeksPerYearTextField" max="-2" attributes="0"/>
-                      <Component id="jWeeksPerYearLabel" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jWeeksPerYearLabel" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                      <Component id="jWeeksPerYearTextField" alignment="3" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
               </Group>

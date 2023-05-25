@@ -12,4 +12,7 @@ public class EmployeeInfo {
         this.deductRate = deductRate;
     }
 
+    public double calcNetAnnualIncome(){
+        return 0.0;
+    }
 }

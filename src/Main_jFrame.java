@@ -1,7 +1,6 @@
 import java.io.*;
 import java.util.*;
 import javax.swing.table.DefaultTableModel;
-import com.formdev.flatlaf.*;
 
 public class Main_jFrame extends javax.swing.JFrame {
 
@@ -12,7 +11,7 @@ public class Main_jFrame extends javax.swing.JFrame {
 
     public Main_jFrame() {
         initComponents();
-        employeeTable = new MyHashTable(10);
+        employeeTable = new MyHashTable(this, 10);
         selectedEmployee = null;
         jSearchButton.doClick();
     }
@@ -43,6 +42,7 @@ public class Main_jFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Main Menu");
+        setResizable(false);
 
         jAddButton.setText("Add");
         jAddButton.addActionListener(new java.awt.event.ActionListener() {
@@ -86,9 +86,9 @@ public class Main_jFrame extends javax.swing.JFrame {
         ));
         jTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jTable.setAutoscrolls(false);
-        jTable.setColumnSelectionAllowed(true);
         jTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        jTable.setShowGrid(true);
         jTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableMouseClicked(evt);
@@ -103,6 +103,11 @@ public class Main_jFrame extends javax.swing.JFrame {
         jSearchComboBox.setToolTipText("");
 
         jSearchTextField.setToolTipText("");
+        jSearchTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jSearchTextFieldKeyPressed(evt);
+            }
+        });
 
         jEditButton.setText("Edit");
         jEditButton.setEnabled(false);
@@ -177,8 +182,29 @@ public class Main_jFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void updateTable(){
+        jEditButton.setEnabled(false);
+        jDeleteButton.setEnabled(false);
+        jSelectedEmployeeLabel.setText("");
+        filteredTable = employeeTable.retrieveAll(jSearchComboBox.getSelectedIndex(), jSearchTextField.getText());
+        int num = filteredTable.size();
+        int row = 0;
+        model = new DefaultTableModel(new Object[] {"Status", "Number", "First Name", "Last Name", "Deduct Rate", "Income"}, num);
+        jTable.setModel(model);
+        jTable.setAutoCreateColumnsFromModel(true);
+        for (EmployeeInfo employee : filteredTable) {
+            model.setValueAt(employee instanceof FTE ? "Full Time" : "Part Time", row, 0);
+            model.setValueAt(employee.employeeNumber, row, 1);
+            model.setValueAt(employee.firstName, row, 2);
+            model.setValueAt(employee.lastName, row, 3);
+            model.setValueAt(Integer.toString((int)(employee.deductRate *100)) + "%", row, 4);
+            model.setValueAt("$" + String.valueOf(employee.calcNetAnnualIncome()), row, 5);
+            row++;
+        }
+    }
+    
     private void jAddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAddButtonActionPerformed
-        new AddChangeEmployee_jFrame(employeeTable, jSearchButton).setVisible(true);
+        new AddChangeEmployee_jFrame(employeeTable).setVisible(true);
     }//GEN-LAST:event_jAddButtonActionPerformed
 
     private void jSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSaveButtonActionPerformed
@@ -221,7 +247,7 @@ public class Main_jFrame extends javax.swing.JFrame {
             jFileChooser.showOpenDialog(this);
             Scanner s = new Scanner(jFileChooser.getSelectedFile());
             s.useDelimiter("█");
-            employeeTable = new MyHashTable(10);    
+            employeeTable = new MyHashTable(this, 10);    
             while (s.hasNext()){
                 if (s.next().equals("F")){
                     employeeTable.add(new FTE(new Object[]{s.nextInt(), s.next(), s.next(), s.nextDouble(), s.nextDouble()}));
@@ -239,28 +265,11 @@ public class Main_jFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jLoadButtonActionPerformed
 
     private void jSearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSearchButtonActionPerformed
-        jEditButton.setEnabled(false);
-        jDeleteButton.setEnabled(false);
-        jSelectedEmployeeLabel.setText("");
-        filteredTable = employeeTable.retrieveAll(jSearchComboBox.getSelectedIndex(), jSearchTextField.getText());
-        int num = filteredTable.size();
-        int row = 0;
-        model = new DefaultTableModel(new Object[] {"Status", "Number", "First Name", "Last Name", "Deduct Rate", "Income"}, num);
-        jTable.setModel(model);
-        jTable.setAutoCreateColumnsFromModel(true);
-        for (EmployeeInfo employee : filteredTable) {
-            model.setValueAt(employee instanceof FTE ? "Full Time" : "Part Time", row, 0);
-            model.setValueAt(employee.employeeNumber, row, 1);
-            model.setValueAt(employee.firstName, row, 2);
-            model.setValueAt(employee.lastName, row, 3);
-            model.setValueAt(Integer.toString((int)(employee.deductRate *100)) + "%", row, 4);
-            model.setValueAt(employee instanceof FTE ? "$" + String.valueOf(((FTE)employee).calcNetAnnualIncome()) : "$" + String.valueOf(((PTE)employee).calcNetAnnualIncome()), row, 5);
-            row++;
-        }
+        updateTable();
     }//GEN-LAST:event_jSearchButtonActionPerformed
 
     private void jEditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEditButtonActionPerformed
-        new AddChangeEmployee_jFrame(employeeTable, jSearchButton, selectedEmployee).setVisible(true);
+        new AddChangeEmployee_jFrame(employeeTable, selectedEmployee).setVisible(true);
         jSearchButton.doClick();
     }//GEN-LAST:event_jEditButtonActionPerformed
 
@@ -279,6 +288,12 @@ public class Main_jFrame extends javax.swing.JFrame {
             jSearchButton.doClick();
         }
     }//GEN-LAST:event_jDeleteButtonActionPerformed
+
+    private void jSearchTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jSearchTextFieldKeyPressed
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+            updateTable();
+        }
+    }//GEN-LAST:event_jSearchTextFieldKeyPressed
 
     /**
      * @param args the command line arguments

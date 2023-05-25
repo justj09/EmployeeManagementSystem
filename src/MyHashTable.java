@@ -2,16 +2,13 @@ import java.util.*;
 
 public class MyHashTable {
     
-    public static final int EMPLOYEE_NUMBER_INDEX = 0;
-    public static final int FIRST_NAME_INDEX = 1;
-    public static final int LAST_NAME_INDEX = 2;
-    public static final int DEDUCT_RATE_INDEX = 3;
-
+    private Main_jFrame main;
     public ArrayList<EmployeeInfo>[] buckets;
     public int size;
 
-    public MyHashTable(int numOfBuckets) {
-        buckets = new ArrayList[numOfBuckets];
+    public MyHashTable(Main_jFrame main, int numOfBuckets) {
+        this.main = main;
+        this.buckets = new ArrayList[numOfBuckets];
         for (int i = 0; i < numOfBuckets; i++) {
             buckets[i] = new ArrayList();
         }
@@ -24,6 +21,7 @@ public class MyHashTable {
     public void add(EmployeeInfo addedEmployee) {
         if (addedEmployee != null) {
             buckets[calcBucket(addedEmployee.employeeNumber)].add(addedEmployee);
+            main.updateTable();
             size++;
         }
     }
@@ -31,9 +29,11 @@ public class MyHashTable {
     public EmployeeInfo remove(int employeeNumber) {
         EmployeeInfo currentItem = retrieve(employeeNumber);
         if (buckets[calcBucket(employeeNumber)].remove(currentItem)) {
+            main.updateTable();
             size--;
             return currentItem;
-        } else {
+        } 
+        else {
             return null;
         }
     }
@@ -54,16 +54,16 @@ public class MyHashTable {
             for (EmployeeInfo item : bucket) {
                 try {
                     switch (type){
-                        case EMPLOYEE_NUMBER_INDEX:
+                        case 0:
                             condition = String.valueOf(item.employeeNumber).contains(query);
                             break;
-                        case FIRST_NAME_INDEX:
+                        case 1:
                             condition = item.firstName.contains(query);
                             break;  
-                        case LAST_NAME_INDEX:
+                        case 2:
                             condition = item.lastName.contains(query);
                             break;
-                        case DEDUCT_RATE_INDEX:
+                        case 3:
                             if (query.endsWith("%")){
                                 query = query.substring(0, query.length() - 1);
                             }

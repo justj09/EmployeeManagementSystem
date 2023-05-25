@@ -4,16 +4,14 @@ import java.util.*;
 
 public class AddChangeEmployee_jFrame extends javax.swing.JFrame {
     public MyHashTable employeeTable;
-    public javax.swing.JButton jSearchButton;
     public javax.swing.JFormattedTextField[] FTEFieldArray;
     public javax.swing.JFormattedTextField[] PTEFieldArray;
     public Map<javax.swing.JFormattedTextField, String> textFieldType;
     public EmployeeInfo selectedEmployee;
     
-    public AddChangeEmployee_jFrame(MyHashTable employeeTable, javax.swing.JButton jSearchButton) {
+    public AddChangeEmployee_jFrame(MyHashTable employeeTable) {
         initComponents();
         this.employeeTable = employeeTable;
-        this.jSearchButton = jSearchButton;
         this.FTEFieldArray = new JFormattedTextField[]{jEmployeeNumberTextField, jFirstNameTextField, jLastNameTextField, jDeductRateTextField, jSalaryTextField};
         this.PTEFieldArray = new JFormattedTextField[]{jEmployeeNumberTextField, jFirstNameTextField, jLastNameTextField, jDeductRateTextField, jHourlyWageTextField, jHoursPerWeekTextField, jWeeksPerYearTextField};
         this.textFieldType = Map.of(jEmployeeNumberTextField, "0", jFirstNameTextField,"", jLastNameTextField, "", jDeductRateTextField, "0%", jSalaryTextField, "0", jHourlyWageTextField, "0", jHoursPerWeekTextField, "0", jWeeksPerYearTextField, "0");
@@ -25,8 +23,8 @@ public class AddChangeEmployee_jFrame extends javax.swing.JFrame {
         pack();
     }
     
-    public AddChangeEmployee_jFrame(MyHashTable employeeTable, javax.swing.JButton jSearchButton, EmployeeInfo selectedEmployee) {
-        this(employeeTable, jSearchButton);
+    public AddChangeEmployee_jFrame(MyHashTable employeeTable, EmployeeInfo selectedEmployee) {
+        this(employeeTable);
         this.selectedEmployee = selectedEmployee;
         this.setTitle("Change Employee #" + Integer.toString(selectedEmployee.employeeNumber));
         jAddChangeButton.setText("Change");
@@ -288,31 +286,32 @@ public class AddChangeEmployee_jFrame extends javax.swing.JFrame {
         jPTEPanelLayout.setHorizontalGroup(
             jPTEPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPTEPanelLayout.createSequentialGroup()
-                .addGroup(jPTEPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jHoursPerWeekLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jWeeksPerYearLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jHourlyWageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPTEPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jHourlyWageTextField)
+                    .addComponent(jWeeksPerYearLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jHoursPerWeekLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jHourlyWageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPTEPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jHourlyWageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jHoursPerWeekTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jWeeksPerYearTextField)))
+                    .addComponent(jWeeksPerYearTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPTEPanelLayout.setVerticalGroup(
             jPTEPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPTEPanelLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
-                .addGroup(jPTEPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jHourlyWageTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jHourlyWageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPTEPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jHourlyWageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jHourlyWageTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPTEPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jHoursPerWeekLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jHoursPerWeekTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPTEPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jWeeksPerYearTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jWeeksPerYearLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPTEPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jWeeksPerYearLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jWeeksPerYearTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, 0))
         );
 
@@ -361,23 +360,27 @@ public class AddChangeEmployee_jFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jMainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPTERadioButton)
-                            .addComponent(jFTERadioButton)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jAddChangeButton)
+                                .addGap(30, 30, 30)
+                                .addComponent(jRemoveButton)
+                                .addGap(30, 30, 30)
+                                .addComponent(jResponseLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jMainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(20, 20, 20)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jPTERadioButton)
+                                    .addComponent(jFTERadioButton))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPTEPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(20, 20, 20))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jAddChangeButton)
-                        .addGap(30, 30, 30)
-                        .addComponent(jRemoveButton)
-                        .addGap(30, 30, 30)
-                        .addComponent(jResponseLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPTEPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jFTEPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(92, 92, 92)))
-                .addGap(20, 20, 20))
+                        .addComponent(jFTEPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -442,7 +445,6 @@ public class AddChangeEmployee_jFrame extends javax.swing.JFrame {
                 employeeTable.remove(selectedEmployee.employeeNumber);
                 selectedEmployee = employeeTable.retrieve((int)jEmployeeNumberTextField.getValue());
             }
-            jSearchButton.doClick();
         }
         else {
             for (javax.swing.JFormattedTextField i : list){
